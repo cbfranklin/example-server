@@ -1,0 +1,11 @@
+{
+  "name": "example-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "author": "Connor Franklin <connor.franklin@etrade.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

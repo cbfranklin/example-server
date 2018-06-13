@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- this is a static, "flat-file" page. -->
+<!-- the HTML within is sent back to the browser as its response -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Stanley Cup</title>
+  <!-- css stylesheet sets the styles for this page -->
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+  <h1>Stanley Cup</h1>
+  <p>Select a team below</p>
+  <!-- this is an unordered list (<ul>) of list items (<li>) each containing a link (<a>) that makes a request of the application in server.js at "teams/[team name here]" -->
+  <ul>
+    <li><a href="teams/Philadelphia Flyers">Philadelphia Flyers</a></li>
+    <li><a href="teams/Calgary Flames">Calgary Flames</a></li>
+    <li><a href="teams/Edmonton Oilers">Edmonton Oilers</a></li>
+    <li><a href="teams/Carolina Hurricanes">Carolina Hurricanes</a></li>
+    <li><a href="teams/Colorado Avalanche">Colorado Avalanche</a></li>
+    <li><a href="teams/New York Rangers">New York Rangers</a></li>
+    <li><a href="teams/Montreal Canadiens">Montreal Canadiens</a></li>
+    <li><a href="teams/Anaheim Ducks">Anaheim Ducks</a></li>
+    <li><a href="teams/Pittsburgh Penguins">Pittsburgh Penguins</a></li>
+    <li><a href="teams/Detroit Red Wings">Detroit Red Wings</a></li>
+    <li><a href="teams/New York Islanders">New York Islanders</a></li>
+    <li><a href="teams/Boston Bruins">Boston Bruins</a></li>
+    <li><a href="teams/Dallas Stars">Dallas Stars</a></li>
+    <li><a href="teams/New Jersey Devils">New Jersey Devils</a></li>
+    <li><a href="teams/Los Angeles Kings">Los Angeles Kings</a></li>
+    <li><a href="teams/Tampa Bay Lightning">Tampa Bay Lightning</a></li>
+    <li><a href="teams/Chicago Blackhawks">Chicago Blackhawks</a></li>
+    <li><a href="teams/Toronto Maple Leafs">Toronto Maple Leafs</a></li>
+    <li><a href="teams/Chicago Black Hawks">Chicago Black Hawks</a></li>
+    <li><a href="teams/Montreal Maroons">Montreal Maroons</a></li>
+    <li><a href="teams/Ottawa Senators">Ottawa Senators</a></li>
+    <li><a href="teams/Toronto St. Patricks">Toronto St. Patricks</a></li>
+    <li><a href="teams/Toronto Arenas">Toronto Arenas</a></li>
+  </ul>
+  <!-- the server will read the team name requested of it, and return data on that team to the user in the form of a new page rendered in server.js -->
+</body>
+
+</html>

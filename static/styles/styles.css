@@ -1,0 +1,4 @@
+/* this is etrade, so lets make all the links (<a>s) purple */
+a{
+  color:purple;
+}
