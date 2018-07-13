@@ -1,57 +1,48 @@
-// this is a NodeJS web application
 
-// load the "express" server framework
 const express = require('express');
-
-// define "app" as the name of our express server
+const request = require('request');
+const cheerio = require('cheerio');
 const app = express();
 
-// import stanley cup data,
-// converted to JSON format,
-// from a table I found here:
-// https://www.hockey-reference.com/awards/stanley.html,
-// calling it "data"
-const data = require('./data.json');
+var ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36';
 
-// this will look through each season and determine if the provided team won,
-// then it will add that season to a list called "cups"
-const getAllCupWinsForTeam = (team) => {
-  // define and empty array (list) called "cups"
-  let cups = [];
-  // go through each cup in our data,
-  // and for each of them...
-  for(let cup of data){
-    // see if our team matches the team that won that year,
-    // if so...
-    if(cup.Team === team){
-      // add that year to the list
-      cups.push(cup.Season);
-    }
-  }
-  // this is the full list provided to the "seasons" variable below
-  return cups;
-}
-
-// for requests to http://localhost:3000/[no path],
-// serve static html from the "static" folder
-app.use('/', express.static('static'));
-
-// for all requests (links) to http://localhost:3000/team/[your team here],
-// return all seasons that the requested team has won the cup
-app.get('/teams/:team', (req, res) => {
-  // set the value of the team requested
-  const requestedTeam = req.params.team;
-  // log it to the server console so we can see it there for debugging purposes
-  console.log(requestedTeam);
-  // set the value of "seasons" to the result of the function getAllCupWinsForTeam, defined above^^
-  const seasons = getAllCupWinsForTeam(requestedTeam);
-  // create a dynamic html template to visualize the results.
-  // ${} is a reference to a variable above
-  const html = `<h1>The ${requestedTeam} won the Stanley Cup the following seasons:</h1>
-                    <p>${seasons}</p>`
-  // send the template, with data inserted, back to the user
-  res.send(html);
+request.defaults({
+    headers: {'User-Agent': ua}
 });
 
-// start the server, and say so in the server console
+
+app.use('/', express.static('static'));
+
+app.get('/search', function(req, res) {
+	var query = req.query.q;
+	var ddgQuery = `https://duckduckgo.com/html?q=site%3Aetrade.design${query}`;
+	console.log(ddgQuery)
+	request(ddgQuery, function(error, response, html) {
+	    if (!error && response.statusCode == 200) {
+            var $ = cheerio.load(html);
+            console.log($.html())
+	        var results = [];
+	        $('#links .result').each(function(){
+
+                var $link = $(this).find('.result__a');
+                var $snippet = $(this).find('.result__snippet');
+
+	        	var resultsItem = {
+	        		'title': $link.text(),
+                    'href': $link.attr('href'),
+                    'snippet': $snippet.html(),
+	        	}
+	        	results.push(resultsItem);
+	        })
+	        console.log(results)
+	        res.json(results)
+	    }
+	    else{
+            console.log(error+response.statusCode)
+	    	res.send(error+response.statusCode);
+	    }
+	});
+});
+
+
 app.listen(3000, () => console.log('Listening for requests on port 3000'))
