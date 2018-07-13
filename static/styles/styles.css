@@ -1,4 +1,4 @@
-/* this is etrade, so lets make all the links (<a>s) purple */
-a{
-  color:purple;
+.gsc-control-cse{
+  border:0!important;
+  padding:0!important;
 }

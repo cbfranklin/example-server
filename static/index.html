@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- this is a static, "flat-file" page. -->
-<!-- the HTML within is sent back to the browser as its response -->
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title>Design Language | Search</title>
-  <!-- css stylesheet sets the styles for this page -->
   <link rel="stylesheet" href="styles/styles.css">
   <link rel="stylesheet" href="styles/design-language/edesign-language.css">
 </head>
@@ -15,20 +12,14 @@
 <body>
   <section>
     <div class="container">
-      <div class="row">
+      <div class="row vertical-offset-md">
         <div class="col-xs-12">
           <h1>Design Language Search</h1>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="search">Search using DuckDuckGo</label>
-            <div class="row">
-              <div class="col-sm-9"><input type="text" class="form-control" id="search" placeholder="Cenetered columns"></div>
-              <div class="col-sm-3"><button class="btn btn-primary btn-block" id="submit">Search</button></div>
-            </div>
-          </div>
+        <div class="col-xs-12" id="search">
+          <gcse:search enableAutoComplete="true"></gcse:search>
         </div>
       </div>
     </div>
