@@ -1,0 +1,88 @@
+$progress-segmented-inactive-color: $background-inactive-color;
+$progress-segmented-active-color: $brand-green;
+$progress-segmented-default-spacing: 3px;
+$progress-segmented-bar-height: 4px;
+
+.progress.progress-segmented {
+    // remove default .progress styling
+    overflow: hidden;
+    height: auto;
+    margin-bottom: auto;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    // start segmented styles
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: $progress-segmented-default-spacing;
+    margin-top: $progress-segmented-default-spacing;
+    &.progress-segmented-labels-hidden .progress-segment .progress-label,
+    .progress.progress-segmented.progress-segmented-labels-hidden .progress-segment.active .progress-label {
+        display: none;
+    }
+    .progress-segment {
+        display: table-cell;
+        text-align: center;
+        vertical-align: bottom;
+        border-bottom-width: $progress-segmented-bar-height;
+        border-bottom-style: solid;
+        border-bottom-color: $progress-segmented-inactive-color;
+        padding-bottom: 5px;
+        &.active {
+            border-bottom-color: $progress-segmented-active-color;
+        }
+        &.active-partial,
+        &.active-half {
+            position: relative;
+            border-bottom-color: $progress-segmented-inactive-color;
+            &:after {
+                position: absolute;
+                content: "";
+                height: $progress-segmented-bar-height;
+                left: 0;
+                background: $progress-segmented-active-color;
+                display: inline-block;
+                bottom: -$progress-segmented-bar-height;
+            }
+        }
+        .progress-label {
+            display: none;
+        }
+    }
+}
+
+
+.progress.progress-segmented .progress-segment.active-half:after {
+    width: 50%;
+}
+
+@for $i from 0 through 100 {
+    .progress.progress-segmented .progress-segment.active-partial.active-partial-#{$i}:after {
+        width: #{$i}#{"%"};
+    }
+}
+
+
+#{$dark-theme-class-name} .progress.progress-segmented .progress-label,
+.progress.progress-segmented .progress-label#{$dark-theme-class-name} {
+    color: $white;
+}
+
+/// breakpoint small show only the activated segment's progress label
+@include breakpoint-sm() {
+    .progress.progress-segmented .progress-segment.active .progress-label,
+    .progress.progress-segmented .progress-segment.active-half .progress-label {
+        display: block;
+    }
+    .progress.progress-segmented.progress-segmented-labels-hidden .progress-segment.active .progress-label {
+        display: none;
+    }
+}
+
+/// breakpoint medium show all progress labels
+@include breakpoint-md() {
+    .progress.progress-segmented .progress-segment .progress-label {
+        display: block;
+    }
+}

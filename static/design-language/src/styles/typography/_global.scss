@@ -1,0 +1,190 @@
+@include font-face("ETradeFort", "Extralight", $font-weight-lighter, normal);
+@include font-face("ETradeFort", "ExtralightItalic", $font-weight-lighter, italic);
+@include font-face("ETradeFort", "Light", $font-weight-light, normal);
+@include font-face("ETradeFort", "LightItalic", $font-weight-light, italic);
+@include font-face("ETradeFort", "Book", $font-weight-normal, normal);
+@include font-face("ETradeFort", "BookItalic", $font-weight-normal, italic);
+@include font-face("ETradeFort", "Medium", $font-weight-medium, normal);
+@include font-face("ETradeFort", "MediumItalic", $font-weight-medium, italic);
+
+/// Material Icons
+@font-face {
+    // sass-lint:disable-all
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('#{$fonts-path}MaterialIcons-Regular.eot');
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url('#{$fonts-path}MaterialIcons-Regular.woff2') format('woff2'), url('#{$fonts-path}MaterialIcons-Regular.woff') format('woff'), url('#{$fonts-path}MaterialIcons-Regular.ttf') format('truetype');
+    // sass-lint:enable-all
+}
+
+.material-icons {
+    @include material-icons();
+    font-size: inherit;
+}
+
+
+/// customer styling by default
+@each $header in $headers {
+    #{$header} {
+        margin: $component-margins;
+        color: $header-text-color;
+        font-weight: $font-weight-light;
+        letter-spacing: initial;
+        line-height: $line-height-base;
+        margin-bottom: $spacing-xs;
+    }
+    /// headers in dark mode - color should be white when using the dark theme, therefor this is important
+    // sass-lint:disable-all
+    #{$header}#{$dark-theme-class-name},
+    #{$dark-theme-class-name} #{$header} {
+        color: $white;
+    }
+    // sass-lint:enable-all
+}
+
+/// extra large header
+h1,
+.h1,
+.extra-large-header {
+    font-size: 26px;
+    line-height: 29px;
+}
+
+/// large header
+h2,
+.h2,
+.large-header {
+    font-size: 22px;
+    line-height: 24px;
+}
+
+/// medium header
+h3,
+.h3,
+.medium-header {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+/// small header
+h4,
+.h4,
+.small-header {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+/// tiny header
+h5,
+.h5,
+.tiny-header {
+    font-size: 14px;
+    line-height: 17px;
+}
+
+/// subhead
+h6,
+.h6,
+.subhead {
+    font-weight: $font-weight-medium;
+    font-size: 13px;
+    color: $header-text-color;
+    line-height: 18px;
+}
+
+p {
+    margin: $component-margins;
+    line-height: 18px;
+}
+
+
+
+.text-disclaimer {
+    font-weight: $font-weight-light;
+    font-size: 13px;
+    color: $ghost-color;
+    line-height: 1.4;
+}
+
+/// text-bold in a disclaimer should also reflect the color change on dark
+// sass-lint:disable-all
+#{$dark-theme-class-name} .text-disclaimer,
+.text-disclaimer#{$dark-theme-class-name} {
+    color: $border-color;
+    b, strong, .text-bold {
+        color: $border-color;
+    }
+}
+// sass-lint:enable-all
+
+/// text-bold should always have font-weight-bold, therefore it is important.
+// sass-lint:disable-all
+.text-bold, strong, b {
+    font-weight: $font-weight-medium !important;
+}
+// sass-lint:enable-all
+
+/// text-bold should always have font-weight-bold, therefore it is important.
+// sass-lint:disable-all
+.text-white {
+    color: $white !important;
+}
+// sass-lint:enable-all
+
+.text-muted {
+    color: $ghost-color;
+}
+
+// sass-lint:enable-all
+
+/// text-brand-green - uses the brand green. this should ONLY be used on navy backgrounds.
+/// this should always be green when this class is used, therefore it is important.
+// sass-lint:disable-all
+.text-brand-green {
+    color: $brand-green !important;
+}
+// sass-lint:enable-all
+
+/// text-positive - when using text positive, the color should always be the $positive color, therefor it is important
+// sass-lint:disable-all
+.text-positive {
+    color: $positive !important;
+}
+
+.text-positive#{$dark-theme-class-name},
+#{$dark-theme-class-name} .text-positive {
+    color: $positive-dark !important;
+}
+// sass-lint:enable-all
+
+/// text-negative - when using text negative, the color should always be the $negative color, therefor it is important
+// sass-lint:disable-all
+.text-negative,
+.has-error {
+    color: $negative !important;
+}
+
+.text-negative#{$dark-theme-class-name},
+#{$dark-theme-class-name} .text-negative {
+    color: $negative-dark !important;
+}
+// sass-lint:enable-all
+
+
+.text-truncate {
+    @include text-truncate();
+}
+
+.center-x {
+    @include center-x();
+}
+
+.center-y {
+    @include center-y();
+}
+
+.center-xy {
+    @include center-xy();
+}

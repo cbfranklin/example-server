@@ -1,0 +1,176 @@
+$dropdown-background-color-primary: $btn-background-color-primary-active;
+$dropdown-background-color-primary-hover: $btn-background-color-primary-hover;
+$dropdown-mobile-font-size: $btn-font-size-base-mobile;
+$dropdown-font-size-base: $font-size-base;
+$dropdown-font-weight-medium: $font-weight-medium;
+$dropdown-purple: $brand-purple;
+$dropdown-border-radius: 4px;
+
+$dropdown-button-padding: 8px 0 8px 15px;
+$dropdown-button-padding-right: 0;
+$dropdown-button-material-icon-font-size: 24px;
+$dropdown-button-material-icon-font-size-mobile: 30px;
+$dropdown-button-material-icon-margin: -8px 0;
+$dropdown-button-material-icon-padding-right: 10px;
+
+// $dropdown-button-link-padding: 3px 0 3px 10px;
+$dropdown-button-link-padding: 3px 0;
+$dropdown-button-link-font-size: 15px;
+
+$dropdown-button-md-padding: 5px 0 4px 10px;
+$dropdown-button-md-font-size: 21px;
+$dropdown-button-md-margin: 2px;
+
+$dropdown-button-md-padding-mobile: 6px;
+$dropdown-button-md-font-size: 28px;
+
+$dropdown-button-sm-padding: 3px 0 3px 10px;
+$dropdown-button-sm-font-size: 20px;
+$dropdown-button-sm-font-size-mobile: 26px;
+
+.dropdown {
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
+    .btn {
+        max-width: 100%;
+        .material-icons {
+            @include breakpoint-sm {
+                font-size: $dropdown-button-material-icon-font-size;
+            }
+            font-size: $dropdown-button-material-icon-font-size-mobile;
+            margin: $dropdown-button-material-icon-margin;
+        }
+        &.btn-link {
+            @include breakpoint-sm {
+                padding: $dropdown-button-link-padding;
+            }
+            .material-icons {
+                font-size: $dropdown-button-link-font-size;
+                margin-left: 0;
+                padding-right: 6px;
+            }
+        }
+        &.btn-md:not(.btn-link) {
+            @include breakpoint-sm {
+                padding: $dropdown-button-md-padding;
+            }
+            .material-icons {
+                @include breakpoint-sm {
+                    font-size: $dropdown-button-md-font-size;
+                    margin-left: $dropdown-button-md-margin;
+                }
+                font-size: $dropdown-button-md-font-size;
+                padding-right: $dropdown-button-md-padding-mobile;
+            }
+        }
+        &.btn-sm:not(.btn-link) {
+            @include breakpoint-sm {
+                padding: $dropdown-button-sm-padding;
+            }
+            .material-icons {
+                @include breakpoint-sm {
+                    font-size: $dropdown-button-sm-font-size;
+                    margin-left: 0;
+                }
+                font-size: $dropdown-button-sm-font-size-mobile;
+                padding-right: 6px;
+            }
+        }
+    }
+    // button styled as a link, without the .btn helper class for button default padding
+    .btn-link:not(.btn) + .dropdown-menu {
+        margin: 0;
+    }
+}
+
+.dropdown-menu {
+    @include breakpoint-sm {
+        font-size: $dropdown-font-size-base;
+    }
+    position: absolute;
+    top: inherit;
+    left: 0;
+    z-index: 5000;
+    min-width: 100%;
+    padding: 0;
+    margin: -11px 0 0;
+    font-size: $dropdown-mobile-font-size;
+    border-bottom-left-radius: $dropdown-border-radius;
+    border-bottom-right-radius: $dropdown-border-radius;
+    display: none;
+    .divider {
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+    }
+    > li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        > a {
+            user-select: none;
+            display: block;
+            padding: 8px 20px;
+            line-height: 1.4;
+            white-space: nowrap; // prevent links from breaking onto new lines
+            margin: -1px -1px 0 -1px; // clear the gap around the link and the background
+            &:hover,
+            &:focus,
+            &:active {
+                text-decoration: none;
+            }
+        }
+    }
+    > li:last-of-type > a {
+        border-bottom-left-radius: $dropdown-border-radius;
+        border-bottom-right-radius: $dropdown-border-radius;
+        margin-bottom: -1px;
+    }
+}
+
+// Colors for btn-primary menu
+.btn-primary + .dropdown-menu,
+.btn-primary + .dropdown-backdrop + .dropdown-menu {
+    background-color: $dropdown-background-color-primary;
+    border: 1px solid $dropdown-background-color-primary;
+    .divider {
+        background-color: $white;
+    }
+    > li > a {
+        color: $white;
+        &:hover,
+        &:focus {
+            color: $white;
+            background-color: $dropdown-background-color-primary-hover;
+        }
+    }
+}
+
+// Colors for btn-primary-outline menu AND btn-link
+.btn-primary-outline + .dropdown-menu,
+.btn-primary-outline + .dropdown-backdrop + .dropdown-menu,
+.btn-link + .dropdown-menu,
+.btn-link + .dropdown-backdrop + .dropdown-menu {
+    background-color: $white;
+    border: 1px solid $dropdown-purple;
+    .divider {
+        background-color: $dropdown-purple;
+    }
+    > li > a {
+        color: $dropdown-purple;
+        &:hover {
+            color: $white;
+            background-color: $dropdown-purple;
+            text-decoration: none;
+        }
+    }
+}
+
+// Open state for the dropdown
+.open {
+    > .dropdown-menu {
+        display: block; // Show the menu
+    }
+}
+

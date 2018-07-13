@@ -1,0 +1,101 @@
+$definition-list-font-weight: $font-weight-normal;
+$definition-list-border-color: $border-color;
+$definition-list-border-width: 1px;
+$definition-list-header-border-width: 2px;
+$definition-list-label-color: $text-muted;
+$definition-list-border-color-xs: transparent;
+$definition-list-heading-border-color: transparent;
+
+dl.definition-list {
+    dt,
+    dd {
+        @include breakpoint-sm() {
+            width: calc(50% - 10px);
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 10px;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        font-weight: $definition-list-font-weight;
+        width: 100%;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
+
+    dt.heading {
+        @include breakpoint-sm() {
+            width: 50%;
+        }
+        width: auto;
+        display: inline-block;
+    }
+    dd.heading {
+        width: auto;
+        float: right;
+        display: inline-block;
+    }
+
+    dt.heading.bordered + dd.heading + dt + dd:before,
+    dt.heading + dd.heading.bordered + dt + dd:before {
+        @include breakpoint-sm() {
+            background: $definition-list-border-color;
+        }
+        background: $definition-list-border-color-xs;
+        height: $definition-list-header-border-width;
+    }
+
+    dt:not(.heading):first-child + dd:not(.heading):before {
+        background: $definition-list-border-color-xs;
+    }
+
+    dd.heading:before,
+    dt.heading + dd.heading + dt + dd:before {
+        background: $definition-list-heading-border-color;
+    }
+
+    dt:not(.heading) {
+        @include breakpoint-sm() {
+            margin-bottom: 10px;
+        }
+        margin-bottom: 0;
+        color: $definition-list-label-color;
+    }
+
+    dd:before {
+        @include breakpoint-sm() {
+            background: $definition-list-border-color;
+        }
+        content: "";
+        display: block;
+        position: absolute;
+        height: $definition-list-border-width;
+        width: calc(100% - 20px);
+        left: 10px;
+        background: $definition-list-border-color-xs;
+        margin-top: -10px;
+    }
+
+    dd:after {
+        content: "";
+        display: block;
+        clear: left;
+    }
+}
+
+//custom definition list dt column widths
+@for $column from 1 through 12 {
+    $dt-width: $column / 12 * 100;
+    dl.definition-list-col-#{$column} {
+        dt {
+            @include breakpoint-sm() {
+                width: calc(#{$dt-width}% - 10px);
+            }
+        }
+        dd {
+            @include breakpoint-sm() {
+                width: calc(#{100 - $dt-width}% - 10px);
+            }
+        }
+    }
+}

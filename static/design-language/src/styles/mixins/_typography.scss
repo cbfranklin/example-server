@@ -1,0 +1,79 @@
+/// Font stack mixins
+/// for use in scaffold and site-wide styles that differ for prospect, customer, and mobile devices
+@mixin prospect() {
+    .prospect {
+        @content;
+    }
+}
+
+@mixin customer() {
+    .customer {
+        @content;
+    }
+}
+
+/// All Headers, easier to loop through to access all at the same time
+$headers: ("h1", "h2", "h3", "h4", "h5", "h6", ".h1", ".h2", ".h3", ".h4", ".h5", ".h6", ".extra-extra-large-header", ".extra-large-header", ".large-header", ".medium-header", ".small-header", ".tiny-header", ".subhead");
+
+/// Text truncate
+/// Requires inline-block or block for proper styling
+@mixin text-truncate() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin font-face($font-family-name, $font-variant, $font-weight, $font-style) {
+    @font-face {
+        // sass-lint:disable-all
+        $full-font-src: "#{$fonts-path}#{$font-family-name}-#{$font-variant}";
+        font-family: "#{$font-family-name}";
+        src: url($full-font-src + ".eot");
+        src: url("#{$full-font-src}.eot?#iefix") format('embedded-opentype'), url("#{$full-font-src}.woff") format('woff'), url("#{$full-font-src}.ttf") format('truetype'), url("#{$full-font-src}.otf")  format('opentype');
+        font-weight: $font-weight;
+        font-style: $font-style;
+        // sass-lint:enable-all
+    }
+}
+
+@mixin material-icons() {
+    // sass-lint:disable-all
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+    // pointer-events: none;
+    // sass-lint:enable-all
+}
+
+@mixin text-align($breakpoint, $alignment) {
+    @if $breakpoint == "xs" {
+        .text-#{$alignment},
+        .text-#{$alignment}-#{$breakpoint} {
+            text-align: #{$alignment};
+        }
+    } @else {
+        @include breakpoint($breakpoint) {
+            .text-#{$alignment}-#{$breakpoint} {
+                text-align: #{$alignment};
+            }
+        }
+    }
+}

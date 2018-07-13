@@ -1,0 +1,47 @@
+.radio {
+    label, .label {
+        @include breakpoint-sm() {
+            margin-left: 0;
+            line-height: 18px;
+        }
+        margin-left: 15px;
+        line-height: 26px;
+    }
+    & > input[type='radio'] {
+        @extend %default-input;
+        & + label:before {
+            @include breakpoint-sm() {
+                height: 18px;
+                width: 18px;
+                box-shadow: inset 0px 0px 0px 8px $white, inset 0px 0px 0px 8px $brand-green;
+            }
+            height: 26px;
+            width: 26px;
+            content: " ";
+            border-radius: 30px;
+            box-shadow: inset 0px 0px 0px 12px #FFFFFF, inset 0px 0px 0px 12px $brand-green;
+        }
+        &:checked + label:before {
+            @include breakpoint-sm() {
+                box-shadow: inset 0px 0px 0px 3px $white, inset 0px 0px 0px 8px $brand-green;
+            }
+            transition: all $animation-duration $animation-cubic;
+            box-shadow: inset 0px 0px 0px 5px $white, inset 0px 0px 0px 12px $brand-green;
+        }
+        &[disabled] + label:before {
+            @include breakpoint-sm() {
+                box-shadow: inset 0px 0px 0px 0px $white, inset 0px 0px 0px 8px $background-inactive-color;
+            }
+            box-shadow: inset 0px 0px 0px 0px $white, inset 0px 0px 0px 12px $background-inactive-color;
+            color: $background-inactive-color;
+            border-color: $background-inactive-color;
+        }
+        &[disabled]:checked + label:before {
+            @include breakpoint-sm() {
+                box-shadow: inset 0px 0px 0px 3px $white, inset 6px 6px 0px 6px $background-inactive-color;
+            }
+            box-shadow: inset 0px 0px 0px 5px $white, inset 6px 6px 0px 6px $background-inactive-color;
+            border-color: $background-inactive-color;
+        }
+    }
+}

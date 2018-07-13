@@ -1,0 +1,97 @@
+.select-wrapper {
+    position: relative;
+    select {
+        appearance: none; // this -moz-apperance should not be necessary as mozilla deprecated their prefix.
+        // however, this prefix is still required as of 1/5/2017
+        // sass-lint:disable-all
+        -moz-appearance: none; // sass-lint:enable-all
+        padding: 0 25px 0 10px;
+        background-color: $white;
+        background-image: dropdown-icon();
+        background-repeat: no-repeat;
+        background-position: calc(100% - 7px) 50%;
+        // spliting up the shortcut - IE doesn't like it for some reason. 
+        //background: $white dropdown-icon() no-repeat calc(100% - 7px) 50%;
+        &[disabled] {
+            background: $background-color dropdown-icon($ghost-color) no-repeat calc(100% - 7px) 50%;
+        }
+        &:focus {
+            padding-left: 7px;
+        }
+    }
+}
+
+#{$dark-theme-class-name} .select-wrapper select,
+.select-wrapper#{$dark-theme-class-name} select {
+    background-image: $brand-navy dropdown-icon($white) no-repeat calc(100% - 7px) 50%;
+    &[disabled] {
+        color: $border-color;
+        border-color: $border-color;
+        background: transparent dropdown-icon($border-color) no-repeat calc(100% - 7px) 50%;
+    }
+    &.inline {
+        background: none;
+    }
+}
+
+/// dropdown field-status specific adjustments
+.form-group>.select-wrapper+label.field-status {
+    @include gt-ie-9() {
+        margin-top: 4px;
+    }
+    text-align: right;
+    width: 100%;
+    float: left;
+}
+
+@include gt-ie-9() {
+    .select-wrapper {
+        &:before {
+            display: none;
+        }
+        &:after {
+            display: none;
+        }
+        .form-control {
+            height: auto;
+        }
+        select {
+            padding-top: 9px;
+            padding-bottom: 6px; // sass-lint:disable-all
+            &::-ms-expand {
+                display: none;
+            } // sass-lint:enable-all
+        }
+    }
+}
+
+.select-wrapper.inline select {
+    margin: 0 auto;
+    border: none;
+    display: inline-block;
+    text-align-last: center;
+    text-align: center;
+    background-image: dropdown-icon($link-color);
+    width: auto;
+    height: auto;
+    color: $link-color;
+    border-bottom: 1px solid $border-color;
+    font-size: inherit;
+    &.has-error {
+        background-image: dropdown-icon($negative);
+        border-bottom-color: $negative;
+    }
+    &:not([disabled]) {
+        cursor: pointer;
+    }
+    &[disabled],
+    &.disabled {
+        color: $text-muted;
+        background-image: dropdown-icon($ghost-color);
+    }
+    &:active,
+    &:focus {
+        border-bottom-color: $link-color;
+        padding-left: 10px;
+    }
+}

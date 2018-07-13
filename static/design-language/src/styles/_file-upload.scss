@@ -1,0 +1,40 @@
+$file-upload-main-color: $brand-purple;
+$file-upload-border-color: $border-color;
+$file-upload-border-hover-color: $brand-purple;
+$file-upload-icon-color: $ghost-color;
+$file-upload-icon-hover-color: $brand-purple;
+$file-upload-hover-color: rgba(#6633CC, 0.05);
+
+.file-upload {
+    position: relative;
+    padding: 5px;
+    border: 1.5px dashed $file-upload-border-color;
+    min-height: 75px;
+    text-align: center;
+    font-size: 16px;
+    &.file-upload-active {
+        border-color: $file-upload-border-hover-color;
+        background: $file-upload-hover-color;
+        .material-icons {
+            color: $file-upload-main-color;
+        }
+
+    }
+    .material-icons {
+        font-size: 45px;
+        color: $file-upload-icon-color;
+        display: block;
+        margin-bottom: $spacing-xxs;
+    }
+    input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

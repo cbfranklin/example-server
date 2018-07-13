@@ -1,0 +1,129 @@
+// family
+$prospect-font-family-prospect: $font-family-prospect;
+// size
+$prospect-font-size-base:       $font-size-base;
+// weight
+$prospect-font-weight-medium:   $font-weight-medium;
+$prospect-font-weight-normal:   $font-weight-normal;
+$prospect-font-weight-light:    $font-weight-light;
+$prospect-font-weight-lighter:  $font-weight-lighter;
+
+@include prospect() {
+    @include breakpoint-sm() {
+        font-size: $prospect-font-size-base;
+    }
+    font-size: 15px;
+    font-weight: $prospect-font-weight-normal;
+    font-family: $prospect-font-family-prospect;
+    letter-spacing: -0.21px;
+    // sass-lint:disable-all
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: auto;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+    // sass-lint:enable-all
+
+    /// default heading
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    .extra-extra-large-header,
+    .extra-large-header,
+    .large-header,
+    .small-header,
+    .subhead {
+        font-weight: $prospect-font-weight-lighter;
+        letter-spacing: -0.2px;
+        line-height: 1;
+    }
+    /// extra extra large header
+    .extra-extra-large-header {
+        @include breakpoint-sm() {
+            font-size: 72px;
+            line-height: 76px;
+        }
+        font-size: 46px;
+        line-height: 52px;
+        font-weight: $prospect-font-weight-lighter;
+    }
+    /// extra large header
+    h1,
+    .h1,
+    .extra-large-header {
+        @include breakpoint-sm() {
+            font-size: 46px;
+            line-height: 54px;
+        }
+        font-size: 37px;
+        line-height: 42px;
+    }
+    /// large header
+    h2,
+    .h2,
+    .large-header {
+        @include breakpoint-sm() {
+            font-size: 32px;
+            line-height: 36px;
+        }
+        font-size: 24px;
+        line-height: 28px;
+    }
+    /// small header
+    h3,
+    .h3,
+    .small-header {
+        @include breakpoint-sm() {
+            font-size: 22px;
+            line-height: 28px;
+        }
+        font-weight: $prospect-font-weight-light;
+        font-size: 20px;
+        line-height: 26px;
+    }
+    /// subhead
+    h4,
+    h5,
+    h6,
+    .h4,
+    .h5,
+    .h6,
+    .subhead {
+        @include breakpoint-sm() {
+            font-size: 15px;
+            line-height: 24px;
+        }
+        font-weight: $prospect-font-weight-normal;
+        font-size: 17px;
+        line-height: 21px;
+    }
+    .text-disclaimer {
+        @include breakpoint-sm() {
+            font-size: 12px;
+        }
+        font-weight: $prospect-font-weight-normal;
+        a {
+            @include breakpoint-sm() {
+                font-size: 12px;
+            }
+        }
+    }
+    /// text-bold should always have font-weight-bold, therefore it is important.
+    // sass-lint:disable-all
+    .text-bold, strong {
+        font-weight: $prospect-font-weight-medium !important;
+    }
+    // sass-lint:enable-all
+}

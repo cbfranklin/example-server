@@ -1,0 +1,7 @@
+@for $col from 1 through 10 {
+    @if $col % 2 == 0 {
+        .col-centered-#{$col} {
+            @include col-centered($col);
+        }
+    }
+}

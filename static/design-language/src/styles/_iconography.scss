@@ -1,0 +1,143 @@
+$icon-xs: 24px;
+$icon-sm: 36px;
+$icon-md: 48px;
+$icon-lg: 72px;
+$icon-xl: 96px;
+
+$et-icons: (
+    "add-funds": "\e900",
+    "alarm-clock": "\e901",
+    "alert-help": "\e902",
+    "alert": "\e903",
+    "anniversary": "\e904",
+    "anniversary-multiple": "\e905",
+    "bank": "\e906",
+    "calculator": "\e930",
+    "calendar": "\e907",
+    "cheque": "\e908",
+    "clock": "\e909",
+    "compass": "\e931",
+    "computer": "\e90a",
+    "date": "\e928",
+    "downturn": "\e90b",
+    "facts-research": "\e90c",
+    "faqs-fact-sheet": "\e90d",
+    "gear-settings": "\e90e",
+    "gift": "\e90f",
+    "goal": "\e910",
+    "graduation-gift": "\e911",
+    "group-family": "\e912",
+    "growth": "\e913",
+    "help-customer-svc": "\e914",
+    "help-more-info": "\e915",
+    "home-lending": "\e916",
+    "idea": "\e917",
+    "ira-selector": "\e931",
+    "money-auto-investing": "\e918",
+    "money-automatic-investing": "\e918",
+    "money": "\e919",
+    "money-investing": "\e91a",
+    "online-tutorial-laptop": "\e91b",
+    "research-awareness": "\e91c",
+    "retirement": "\e91d",
+    "savings": "\e91e",
+    "security": "\e91f",
+    "smartphone": "\e920",
+    "stopwatch": "\e921",
+    "tool-box-welcome-kit": "\e922",
+    "top-five": "\e923",
+    "umbrella": "\e924",
+    "user": "\e925",
+    "users": "\e926",
+    "video": "\e927",
+    "chat": "\e932",
+    "transaction": "\e933",
+    "school": "\e934",
+    "search": "\e935",
+    "dropped-pin": "\e936",
+    "video-laptop": "\e937",
+    "smartphone-landscape": "\e938"
+);
+
+
+/// et-iconography Icons
+@font-face {
+    // sass-lint:disable-all
+    font-family: 'ET Iconography';
+    src: url('#{$iconography-path}et-iconography.eot?adi9cv');
+    src: url('#{$iconography-path}et-iconography.eot?adi9cv#iefix') format('embedded-opentype'), url('#{$iconography-path}et-iconography.ttf?adi9cv') format('truetype'), url('#{$iconography-path}et-iconography.woff?adi9cv') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    // sass-lint:enable-all
+}
+
+// sass-lint:disable-all
+.et-icon-block {
+    display: block !important;
+}
+// sass-lint:enable-all
+
+.et-icon {
+    @include et-icons();
+    text-align: center;
+    &.et-inverse {
+        color: $white;
+    }
+}
+
+// disabling linting for these because these are fundamental sizes. these sizes should be reinforced and never changed.
+// sass-lint:disable-all
+.et-icon, .material-icons {
+    &.et-icon-xs {
+        font-size: $icon-xs !important;
+    }
+}
+
+.et-icon, .material-icons {
+    &.et-icon-sm {
+        font-size: $icon-sm !important;
+    }
+}
+
+.et-icon, .material-icons {
+    &.et-icon-md {
+        font-size: $icon-md !important;
+    }
+}
+
+.et-icon, .material-icons {
+    &.et-icon-lg {
+        font-size: $icon-lg !important;
+    }
+}
+
+.et-icon, .material-icons {
+    &.et-icon-xl {
+        font-size: $icon-xl !important;
+    }
+}
+// sass-lint:enable-all
+
+@each $icon-name, $icon-character in $et-icons {
+    .et-#{$icon-name}:before {
+        content: "#{$icon-character}";
+    }
+}
+
+@include deprecate('0.0.7', 'The IRA Selector icon has changed. use .et-compass instead') {
+    .et-ira-selector:before {
+        content: "\e931";
+    }
+}
+
+@include deprecate('0.0.9', 'The Facts/Research icon has been deprecated.') {
+    .et-facts-research:before {
+        content: "\e90c";
+    }
+}
+
+@include deprecate('0.0.9', 'The Group Faily icon has been deprecated.') {
+    .et-group-family:before {
+        content: "\e912";
+    }
+}

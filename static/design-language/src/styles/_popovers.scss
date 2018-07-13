@@ -1,0 +1,136 @@
+// Originally the DL called popovers flyouts.
+// Now the flyout class is deprecated and
+// engineers should use the popover class.
+$popover-bg: $white;
+$popover-sm-max-width: 180px;
+$popover-md-max-width: 380px;
+$popover-lg-max-width: 580px;
+$popover-xl-max-width: 780px;
+$popover-border-color: $border-color;
+$popover-arrow-width: 10px !default;
+$popover-arrow-color: $popover-bg !default;
+$popover-arrow-outer-width: ($popover-arrow-width + 1) !default;
+$popover-arrow-outer-color: $popover-border-color;
+$popover-border-radius: 0;
+$popover-box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.13);
+.popover {
+    max-width: $popover-md-max-width;
+    font-size: $font-size-base;
+    font-family: inherit;
+    background-color: $popover-bg;
+    border: 1px solid $popover-border-color;
+    box-shadow: $popover-box-shadow;
+    border-radius: $popover-border-radius;
+    &.top {
+        & > .arrow {
+            border-top-color: $popover-border-color;
+            &:after {
+                border-top-color: $popover-arrow-color;
+            }
+        }
+    }
+    &.right {
+        & > .arrow {
+            border-right-color: $popover-arrow-outer-color;
+            &:after {
+                border-right-color: $popover-arrow-color;
+            }
+        }
+    }
+    &.bottom {
+        & > .arrow {
+            border-bottom-color: $popover-arrow-outer-color;
+            &:after {
+                border-bottom-color: $popover-arrow-color;
+            }
+        }
+    }
+    &.left {
+        & > .arrow {
+            border-left-color: $popover-arrow-outer-color;
+            &:after {
+                border-left-color: $popover-arrow-color;
+            }
+        }
+    }
+}
+
+// deprecated popover sizes
+@include deprecate('0.0.9', '.popover sizing has been deprecated') {
+    .popover.popover-sm {
+        @include breakpoint-sm() {
+            width: $popover-sm-max-width;
+            max-width: $popover-sm-max-width;
+        }
+    }
+    .popover.popover-md {
+        @include breakpoint-sm() {
+            width: $popover-md-max-width;
+            max-width: $popover-md-max-width;
+        }
+    }
+    .popover.popover-lg {
+        @include breakpoint-sm() {
+            width: $popover-lg-max-width;
+            max-width: $popover-lg-max-width;
+        }
+    }
+    .popover.popover-xl {
+        @include breakpoint-sm() {
+            width: $popover-xl-max-width;
+            max-width: $popover-xl-max-width;
+        }
+    }
+}
+
+// deprecated popover with dismiss button
+@include deprecate('0.0.9', '.popover .close (with dismiss button) has been deprecated') {
+    .popover .close {
+        margin: -6px 2px;
+        .material-icons {
+            font-size: 10px;
+        }
+    }
+}
+
+#{$dark-theme-class-name} .popover,
+.popover#{$dark-theme-class-name} {
+    color: $body-text-color;
+    h1, h2, h3, h4, h5, h6 {
+        color: $body-text-color;
+    }
+}
+
+/// We still need flyouts
+@include deprecate('0.0.9', '.flyout has been deprecated. Use .popover instead.') {
+    .flyout {
+        @extend .popover;
+        &.flyout-sm {
+            @include breakpoint-sm() {
+                width: $popover-sm-max-width;
+                max-width: $popover-sm-max-width;
+            }
+        }
+        &.flyout-md {
+            @include breakpoint-sm() {
+                width: $popover-md-max-width;
+                max-width: $popover-md-max-width;
+            }
+        }
+        &.flyout-lg {
+            @include breakpoint-sm() {
+                width: $popover-lg-max-width;
+                max-width: $popover-lg-max-width;
+            }
+        }
+        &.flyout-xl {
+            @include breakpoint-sm() {
+                width: $popover-xl-max-width;
+                max-width: $popover-xl-max-width;
+            }
+        }
+        .flyout-content {
+            @extend .popover-content;
+        }
+    }
+}

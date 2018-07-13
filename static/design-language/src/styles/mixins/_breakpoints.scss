@@ -1,0 +1,51 @@
+@mixin error($content) {
+    @error "#{$content}";
+}
+
+@mixin breakpoint($size) {
+    @if ($size == "xs") {
+        @warn "Extra small breakpoints are not supported in mobile-first environments.";
+    }
+    @else if ($size == "sm") {
+        @media (min-width: $screen-sm-min) {
+            @content;
+        }
+    }
+    @else if ($size == "md") {
+        @media (min-width: $screen-md-min) {
+            @content;
+        }
+    }
+    @else if ($size == "lg") {
+        @media (min-width: $screen-lg-min) {
+            @content;
+        }
+    }
+    @else {
+        @include error("Breakpoint \"#{$size}\" is not an accepted size. Accepted sizes are: sm, md, lg");
+    }
+}
+
+@mixin breakpoint-xs {
+    @include breakpoint("xs") {
+        @content;
+    }
+}
+
+@mixin breakpoint-sm {
+    @include breakpoint("sm") {
+        @content;
+    }
+}
+
+@mixin breakpoint-md {
+    @include breakpoint("md") {
+        @content;
+    }
+}
+
+@mixin breakpoint-lg {
+    @include breakpoint("lg") {
+        @content;
+    }
+}

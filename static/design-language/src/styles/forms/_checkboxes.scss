@@ -1,0 +1,81 @@
+$checkbox-inactive-background-color: $white;
+$checkbox-active-background-color: $brand-green;
+$checkbox-disabled-background-color: $background-inactive-color;
+$checkbox-border-active: $brand-green;
+$checkbox-border-disabled: $background-inactive-color;
+$checkbox-check-color: $white;
+$checkbox-check-disabled-color: $brand-green;
+$checkbox-check-weight: $font-weight-bold;
+
+.checkbox {
+    label, .label {
+        @include breakpoint-sm() {
+            margin: 0;
+        }
+        margin: 3px 0 0 15px;
+    }
+    & > input[type='checkbox'] {
+        @extend %default-input;
+        & + label:before {
+            @include breakpoint-sm() {
+                height: 16px;
+                width: 16px;
+                box-shadow: inset 0px 0px 0px 7px $checkbox-inactive-background-color, inset 0px 0px 0px 7px $checkbox-active-background-color;
+            }
+            content: "";
+            top: 1px;
+            left: 0;
+            height: 26px;
+            width: 26px;
+            box-shadow: inset 0px 0px 0px 12px $checkbox-inactive-background-color, inset 0px 0px 0px 12px $checkbox-active-background-color;
+        }
+        & + label:after {
+            @include breakpoint-sm() {
+                font-size: 16px;
+                height: 16px;
+            }
+            @include material-icons();
+            content: "\E5CA";
+            left: 0;
+            top: 1px;
+            position: absolute;
+            font-size: 25px;
+            color: $checkbox-check-color;
+            text-align: center;
+            height: 25px;
+            width: 0px;
+            overflow: hidden;
+            transition: width $animation-duration ease-in-out;
+            font-weight: $font-weight-bold;
+        }
+        &:checked + label:after {
+            @include breakpoint-sm() {
+                width: 16px;
+            }
+            width: 25px;
+        }
+        &:checked + label:before {
+            @include breakpoint-sm() {
+                box-shadow: inset 0px 0px 0px 0px $checkbox-inactive-background-color, inset 0px 0px 0px 7px $checkbox-active-background-color;
+            }
+            border: 1px solid $brand-green;
+            box-shadow: inset 0px 0px 0px 0px $checkbox-inactive-background-color, inset 0px 0px 0px 12px $checkbox-active-background-color;
+        }
+        &[disabled] + label:before {
+            @include breakpoint-sm() {
+                box-shadow: inset 0px 0px 0px 0px $checkbox-inactive-background-color, inset 0px 0px 0px 7px $checkbox-disabled-background-color;
+            }
+            box-shadow: inset 0px 0px 0px 0px $checkbox-inactive-background-color, inset 0px 0px 0px 12px $checkbox-disabled-background-color;
+            border-color: $checkbox-border-disabled;
+        }
+        &[disabled]:checked + label:before {
+            background-color: transparent;
+            border: none;
+            box-shadow: inset 0px 0px 0px 0px transparent, inset 0px 0px 0px 0px transparent;
+        }
+        &[disabled]:checked + label:after {
+            top: 0.6px;
+            color: $checkbox-check-disabled-color;
+        }
+    }
+}

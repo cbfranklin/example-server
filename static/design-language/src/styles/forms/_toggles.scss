@@ -1,0 +1,210 @@
+$toggle-offset: 5px;
+$toggle-width-pre-offset: 40px;
+$toggle-height-pre-offset: 20px;
+$toggle-border-radius: 16px;
+$toggle-mobile-width-pre-offset: 60px;
+$toggle-mobile-height-pre-offset: 30px;
+$toggle-mobile-border-radius: 24px;
+
+$toggle-thumb-stretch: 3px;
+$toggle-thumb-mobile-size-pre-offset: 24px;
+$toggle-thumb-size-pre-offset: 16px;
+$toggle-thumb-top: 3px;
+$toggle-thumb-off-disabled-color: #f1f1f1;
+$toggle-thumb-border-radius: 100%;
+
+$toggle-thumb-transition-timing: 0.3s;
+$toggle-thumb-cubic-bezier-animation: cubic-bezier(0.47, 0, 0, 1.015);
+$toggle-thumb-width-transition: width $toggle-thumb-transition-timing $toggle-thumb-cubic-bezier-animation;
+$toggle-thumb-left-transition: left $toggle-thumb-transition-timing $toggle-thumb-cubic-bezier-animation;
+$toggle-thumb-color-transition: color $toggle-thumb-transition-timing ease-in-out;
+$toggle-thumb-box-shadow-transition: box-shadow $toggle-thumb-transition-timing ease-in-out;
+$toggle-thumb-margin-transition: margin $toggle-thumb-transition-timing ease-in-out;
+
+// Do not modify, these are derived from the numbers above
+$toggle-height: ($toggle-height-pre-offset - $toggle-offset);
+$toggle-width: ($toggle-width-pre-offset - $toggle-offset);
+$toggle-mobile-height: ($toggle-mobile-height-pre-offset - $toggle-offset);
+$toggle-mobile-width: ($toggle-mobile-width-pre-offset - $toggle-offset);
+$toggle-thumb-mobile-size: $toggle-thumb-mobile-size-pre-offset;
+$toggle-thumb-size: $toggle-thumb-size-pre-offset;
+///
+
+$toggle-shadow-color: #260862;
+$toggle-on-disabled-shadow-color: rgba($toggle-shadow-color, .07);
+$toggle-on-shadow: inset 0 0 6px 0 $toggle-shadow-color;
+$toggle-on-disabled-shadow: inset 0 0 6px 0 $toggle-on-disabled-shadow-color;
+$toggle-off-shadow: none;
+
+$toggle-thumb-on-shadow: none;
+$toggle-thumb-shadow-color: rgba(#929292, .5);
+$toggle-thumb-off-disabled-shadow: none;
+$toggle-thumb-off-shadow: none;
+$toggle-thumb-hover-off-shadow: 0 0 5px 0 $toggle-thumb-shadow-color;
+
+$toggle-on-background-color: $brand-purple;
+$toggle-off-background-color: $background-inactive-color;
+$toggle-on-disabled-background-color: #d1c2f0;
+$toggle-off-disabled-background-color: #e4e4e4;
+
+$toggle-thumb-color: $white;
+
+$toggle-label-mobile-padding: ($toggle-mobile-width + 10);
+$toggle-label-padding: ($toggle-width + 10);
+
+// toggle wrapper, wraps the label with the toggle button
+.toggle {
+    min-height: $toggle-height;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 10px;
+    label {
+        display: block;
+        width: 100%;
+        user-select: none;
+        cursor: pointer;
+    }
+    &.toggle-inline {
+        label {
+            @include breakpoint(sm) {
+                min-height: $toggle-height-pre-offset;
+            }
+            margin-right: 10px;
+            width: auto;
+            vertical-align: middle;
+            min-height: $toggle-mobile-height-pre-offset;
+        }
+        label,
+        .switch {
+            display: inline-block;
+        }
+        >input[type="checkbox"] {
+            left: auto;
+            right: 0;
+            top: 0;
+            margin-top: 0;
+        }
+    }
+    >input[type="checkbox"] {
+        @include breakpoint(sm) {
+            height: $toggle-height-pre-offset;
+            width: $toggle-width-pre-offset;
+        }
+        height: $toggle-mobile-height-pre-offset;
+        opacity: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        appearance: none;
+        background: none;
+        position: absolute;
+        cursor: pointer;
+        z-index: 1;
+        &:active:not(:disabled) ~ .switch:after {
+            @include breakpoint(sm) {
+                width: ($toggle-thumb-size + $toggle-thumb-stretch);
+                border-radius: $toggle-border-radius;
+            }
+            width: ($toggle-thumb-mobile-size + $toggle-thumb-stretch);
+            border-radius: $toggle-mobile-border-radius;
+        }
+        &:active:checked:not(:disabled) ~ .switch:after {
+            left: -5px;
+        }
+        &:checked ~ .switch {
+            background-color: $toggle-on-background-color;
+            border-color: $toggle-on-background-color;
+            &:before {
+                box-shadow: $toggle-on-shadow;
+            }
+        }
+        &:checked ~ .switch:after {
+            margin-left: calc(50% + 3px);
+            box-shadow: $toggle-thumb-on-shadow;
+        }
+        &:not(:disabled) ~ .switch {
+            cursor: pointer;
+        }
+        &:disabled,
+        &:disabled ~ label,
+        &:disabled ~ .switch {
+            cursor: not-allowed;
+        }
+        &:disabled:not(:checked) ~ .switch {
+            background-color: $toggle-off-disabled-background-color;
+            border-color: $toggle-off-disabled-background-color;
+            &:after {
+                background-color: $toggle-thumb-off-disabled-color;
+                box-shadow: $toggle-thumb-off-disabled-shadow;
+            }
+        }
+        &:disabled:checked ~ .switch {
+            background-color: $toggle-on-disabled-background-color;
+            border-color: $toggle-on-disabled-background-color;
+            &:before {
+                box-shadow: $toggle-on-disabled-shadow;
+            }
+        }
+        &:hover ~ .switch:after,
+        &:focus ~ .switch:after {
+            box-shadow: $toggle-thumb-hover-off-shadow;
+        }
+    }
+    // toggle switch wrapper, holds the thumb and the shadow
+    .switch {
+        @include breakpoint(sm) {
+            height: ($toggle-height - $toggle-offset);
+            width: ($toggle-width - $toggle-offset);
+            border-radius: $toggle-border-radius;
+        }
+        box-sizing: content-box;
+        position: relative;
+        height: ($toggle-mobile-height - $toggle-offset);
+        width: ($toggle-mobile-width - $toggle-offset);
+        background-color: $toggle-off-background-color;
+        border-radius: $toggle-mobile-border-radius;
+        border: $toggle-offset solid $toggle-off-background-color;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+        // the shadow to sit on top of the toggle swtich but below the thumb, this exists because
+        // we have a border around the toggle to give it even padding, so inset shadows do not 
+        // show as expected
+        &:before {
+            @include breakpoint(sm) {
+                height: ($toggle-height + $toggle-offset);
+                width: ($toggle-width + $toggle-offset);
+                top: -$toggle-offset;
+                left: -$toggle-offset;
+                border-radius: $toggle-border-radius;
+            }
+            content: "";
+            position: absolute;
+            height: ($toggle-mobile-height + $toggle-offset);
+            width: ($toggle-mobile-width + $toggle-offset);
+            top: -$toggle-offset;
+            left: -$toggle-offset;
+            border-radius: $toggle-mobile-border-radius;
+            box-shadow: $toggle-off-shadow;
+        }
+        // toggle thumb button
+        &:after {
+            @include breakpoint(sm) {
+                height: $toggle-thumb-size;
+                width: $toggle-thumb-size;
+            }
+            @include center-y();
+            box-sizing: content-box;
+            content: "";
+            display: block;
+            border-radius: $toggle-thumb-border-radius;
+            height: $toggle-thumb-mobile-size;
+            width: $toggle-thumb-mobile-size;
+            background: $toggle-thumb-color;
+            border-color: $toggle-thumb-color;
+            box-shadow: $toggle-thumb-off-shadow;
+            transition: $toggle-thumb-width-transition, $toggle-thumb-left-transition, $toggle-thumb-color-transition, $toggle-thumb-box-shadow-transition, $toggle-thumb-margin-transition;
+            left: -2px;
+            border-width: 0;
+            border-style: solid;
+        }
+    }
+}

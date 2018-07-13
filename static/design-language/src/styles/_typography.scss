@@ -1,0 +1,410 @@
+///////
+// global + text styles + utilities
+//////
+@include font-face("ETradeFort", "Book", $font-weight-normal, normal);
+@include font-face("ETradeFort", "BookItalic", $font-weight-normal, italic);
+@include font-face("ETradeFort", "Medium", $font-weight-medium, normal);
+@include font-face("ETradeFort", "MediumItalic", $font-weight-medium, italic);
+@include font-face("ETradeFort", "Bold", $font-weight-bold, normal);
+@include font-face("ETradeFort", "BoldItalic", $font-weight-bold, italic);
+
+/// Material Icons
+@font-face {
+    // sass-lint:disable-all
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('#{$fonts-path}MaterialIcons-Regular.eot');
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url('#{$fonts-path}MaterialIcons-Regular.woff2') format('woff2'), url('#{$fonts-path}MaterialIcons-Regular.woff') format('woff'), url('#{$fonts-path}MaterialIcons-Regular.ttf') format('truetype');
+    // sass-lint:enable-all
+}
+
+.material-icons {
+    @include material-icons();
+    font-size: inherit;
+}
+
+/// text-bold is important due to the style taking precedence
+// sass-lint:disable-all
+.text-bold {
+    font-weight: $font-weight-bold !important;
+}
+// sass-lint:enable-all
+
+/// text-bold in a disclaimer should also reflect the color change on dark
+// sass-lint:disable-all
+#{$dark-theme-class-name} .text-disclaimer,
+.text-disclaimer#{$dark-theme-class-name} {
+    color: $border-color;
+    b, strong, .text-bold {
+        color: $border-color;
+    }
+}
+// sass-lint:enable-all
+
+/// text-white should always have color: $white, therefore it is important.
+// sass-lint:disable-all
+.text-white {
+    color: $white !important;
+}
+// sass-lint:enable-all
+
+/// text-muted should always have color: $ghost-color, therefore it is important.
+// sass-lint:disable-all
+.text-muted {
+    color: $ghost-color !important;
+}
+// sass-lint:enable-all
+
+/// text-brand-green - uses the brand green. this should ONLY be used on navy backgrounds.
+/// this should always be green when this class is used, therefore it is important.
+// sass-lint:disable-all
+.text-brand-green {
+    color: $brand-green !important;
+}
+// sass-lint:enable-all
+
+/// text-positive - when using text positive, the color should always be the $positive color, therefor it is important
+// sass-lint:disable-all
+.text-positive {
+    color: $positive !important;
+}
+
+.text-positive#{$dark-theme-class-name},
+#{$dark-theme-class-name} .text-positive {
+    color: $positive-dark !important;
+}
+// sass-lint:enable-all
+
+/// text-negative - when using text negative, the color should always be the $negative color, therefor it is important
+// sass-lint:disable-all
+.text-negative,
+.has-error {
+    color: $negative !important;
+}
+
+.text-negative#{$dark-theme-class-name},
+#{$dark-theme-class-name} .text-negative {
+    color: $negative-dark !important;
+}
+// sass-lint:enable-all
+
+.text-line-height-reset {
+    line-height: initial;
+}
+
+.text-truncate {
+    @include text-truncate();
+}
+
+.center-x {
+    @include center-x();
+}
+
+.center-y {
+    @include center-y();
+}
+
+.center-xy {
+    @include center-xy();
+}
+
+@each $breakpoint in ("xs", "sm", "md", "lg") {
+	@include text-align($breakpoint, left);
+	@include text-align($breakpoint, center);
+	@include text-align($breakpoint, right);
+}
+
+// Turning off SASSLint for formatting
+// sass-lint:disable-all
+$customer-font: (
+    extra-large-header: (
+        desktop: (font-size: 26px, line-height: 34px, font-weight: $font-weight-medium, letter-spacing: -1px),
+        mobile: (font-size: 30px, line-height: 36px, font-weight: $font-weight-medium, letter-spacing: -1px)
+    ),
+    large-header: (
+        desktop: (font-size: 22px, line-height: 30px, font-weight: $font-weight-medium, letter-spacing: -0.7px),
+        mobile: (font-size: 26px, line-height: 31px, font-weight: $font-weight-medium, letter-spacing: -0.7px)
+    ),
+    medium-header: (
+        desktop: (font-size: 18px, line-height: 26px, font-weight: $font-weight-medium, letter-spacing: -0.4px),
+        mobile: (font-size: 22px, line-height: 22px, font-weight: $font-weight-medium, letter-spacing: -0.4px)
+    ),
+    small-header: (
+        desktop: (font-size: 16px, line-height: 23px, font-weight: $font-weight-medium),
+        mobile: (font-size: 18px, line-height: 25px, font-weight: $font-weight-medium)
+    ),
+    tiny-header: (
+        desktop: (font-size: 14px, line-height: 21px, font-weight: $font-weight-medium),
+        mobile: (font-size: 16px, line-height: 23px, font-weight: $font-weight-medium)
+    ),
+    subhead: (
+        desktop: (font-size: 13px, line-height: 18px, font-weight: $font-weight-medium),
+        mobile: (font-size: 15px, line-height: 22px, font-weight: $font-weight-medium)
+    ),
+    body: (
+        desktop: (font-size: 13px, line-height: 18px, font-weight: $font-weight-book),
+        mobile: (font-size: 15px, line-height: 22px, font-weight: $font-weight-book)
+    ),
+    small-label: (
+        desktop: (font-size: 11px, line-height: 16px, font-weight: $font-weight-book),
+        mobile: (font-size: 13px, line-height: 18px, font-weight: $font-weight-book)
+    ),
+    large-label: (
+        desktop: (font-size: 13px, line-height: 18px, font-weight: $font-weight-book),
+        mobile: (font-size: 15px, line-height: 21px, font-weight: $font-weight-book)
+    ),
+    disclaimer: (
+        desktop: (font-size: 11px, line-height: 16px, font-weight: $font-weight-book),
+        mobile: (font-size: 13px, line-height: 18px, font-weight: $font-weight-book)
+    )
+);
+
+$prospect-font: (
+	extra-extra-large-header: (
+		desktop: (font-size: 72px, line-height: 76px, font-weight: $font-weight-medium, letter-spacing: -1.5px),
+		mobile: (font-size: 46px, line-height: 52px, font-weight: $font-weight-medium, letter-spacing: -1.5px)
+	),
+	extra-large-header: (
+		desktop: (font-size: 46px, line-height: 54px, font-weight: $font-weight-medium, letter-spacing: -1.5px),
+		mobile: (font-size: 37px, line-height: 42px, font-weight: $font-weight-medium, letter-spacing: -1.5px)
+	),
+	large-header: (
+		desktop: (font-size: 32px, line-height: 36px, font-weight: $font-weight-medium, letter-spacing: -1px),
+		mobile: (font-size: 24px, line-height: 28px, font-weight: $font-weight-medium, letter-spacing: -1px)
+	),
+	small-header: (
+		desktop: (font-size: 22px, line-height: 28px, font-weight: $font-weight-medium, letter-spacing: -0.5px),
+		mobile: (font-size: 20px, line-height: 26px, font-weight: $font-weight-medium, letter-spacing: -0.5px)
+	),
+	subhead: (
+		desktop: (font-size: 15px, line-height: 21px, font-weight: $font-weight-medium),
+		mobile: (font-size: 17px, line-height: 24px, font-weight: $font-weight-medium)
+	),
+	body: (
+		desktop: (font-size: 13px, line-height: 18px, font-weight: $font-weight-book),
+		mobile: (font-size: 15px, line-height: 22px, font-weight: $font-weight-book)
+	),
+	label: (
+		desktop: (font-size: 13px, line-height: 16px, font-weight: $font-weight-book),
+		mobile: (font-size: 15px, line-height: 21px, font-weight: $font-weight-book)
+	),
+	disclaimer: (
+		desktop: (font-size: 12px, line-height: 14px, font-weight: $font-weight-book),
+		mobile: (font-size: 13px, line-height: 19px, font-weight: $font-weight-book)
+	)
+);
+// sass-lint:enable-all
+$font-header-letter-spacing: -0.21px;
+$font-header-margin: $component-margins;
+$font-header-color: $header-text-color;
+$font-header-line-height-base: $line-height-base;
+$font-header-font-weight-base: $font-weight-medium;
+
+@function get-header($font-stack, $breakpoint, $header-name, $property) {
+    $font-stack-map: map-get($font-stack, $header-name);
+    $font-breakpoint-map: map-get($font-stack-map, $breakpoint);
+    @return map-get($font-breakpoint-map, $property);
+}
+
+// must pass in an array
+@mixin set-header($header) {
+    @each $selector in $header {
+        #{$selector} {
+            @content;
+        }
+    }
+}
+
+@each $header in $headers {
+    #{$header} {
+        margin: $font-header-margin;
+        color: $font-header-color;
+        font-weight: $font-header-font-weight-base;
+        letter-spacing: $font-header-letter-spacing;
+        line-height: $font-header-line-height-base;
+    }
+    /// headers in dark mode - color should be white when using the dark theme, therefor this is important
+    // sass-lint:disable-all
+    #{$header}#{$dark-theme-class-name},
+    #{$dark-theme-class-name} #{$header} {
+        color: $white;
+    }
+    // sass-lint:enable-all
+}
+
+
+//////////////////////////
+/// Customer
+//////////////////////////
+$customer-extra-large-header: ("h1", ".h1", ".extra-large-header");
+$customer-large-header: ("h2", ".h2", ".large-header");
+$customer-medium-header: ("h3", ".h3", ".medium-header");
+$customer-small-header: ("h3", ".h3", ".small-header");
+$customer-tiny-header: ("h4", ".h4", ".tiny-header");
+$customer-subhead: ("h5", "h6", ".h5", ".h6", ".subhead");
+
+body {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "body", "font-size");
+        font-weight: get-header($customer-font, "desktop", "body", "font-weight");
+        line-height: get-header($customer-font, "desktop", "body", "line-height");
+    }
+    font-size: get-header($customer-font, "mobile", "body", "font-size");
+    font-weight: get-header($customer-font, "mobile", "body", "font-weight");
+    line-height: get-header($customer-font, "mobile", "body", "line-height");
+}
+
+
+@include set-header($customer-extra-large-header) {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "extra-large-header", "font-size");
+        line-height: get-header($customer-font, "desktop", "extra-large-header", "line-height");
+        font-weight: get-header($customer-font, "desktop", "extra-large-header", "font-weight");
+        letter-spacing: get-header($customer-font, "desktop", "extra-large-header", "letter-spacing");
+    }
+    font-size: get-header($customer-font, "mobile", "extra-large-header", "font-size");
+    line-height: get-header($customer-font, "mobile", "extra-large-header", "line-height");
+    font-weight: get-header($customer-font, "mobile", "extra-large-header", "font-weight");
+    letter-spacing: get-header($customer-font, "mobile", "extra-large-header", "letter-spacing");
+}
+
+@include set-header($customer-large-header) {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "large-header", "font-size");
+        line-height: get-header($customer-font, "desktop", "large-header", "line-height");
+        font-weight: get-header($customer-font, "desktop", "large-header", "font-weight");
+        letter-spacing: get-header($customer-font, "desktop", "large-header", "letter-spacing");
+    }
+    font-size: get-header($customer-font, "mobile", "large-header", "font-size");
+    line-height: get-header($customer-font, "mobile", "large-header", "line-height");
+    font-weight: get-header($customer-font, "mobile", "large-header", "font-weight");
+    letter-spacing: get-header($customer-font, "mobile", "large-header", "letter-spacing");
+}
+
+@include set-header($customer-medium-header) {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "medium-header", "font-size");
+        line-height: get-header($customer-font, "desktop", "medium-header", "line-height");
+        font-weight: get-header($customer-font, "desktop", "medium-header", "font-weight");
+        letter-spacing: get-header($customer-font, "desktop", "medium-header", "letter-spacing");
+    }
+    font-size: get-header($customer-font, "mobile", "medium-header", "font-size");
+    line-height: get-header($customer-font, "mobile", "medium-header", "line-height");
+    font-weight: get-header($customer-font, "mobile", "medium-header", "font-weight");
+    letter-spacing: get-header($customer-font, "mobile", "medium-header", "letter-spacing");
+}
+
+@include set-header($customer-small-header) {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "small-header", "font-size");
+        line-height: get-header($customer-font, "desktop", "small-header", "line-height");
+        font-weight: get-header($customer-font, "desktop", "small-header", "font-weight");
+    }
+    font-size: get-header($customer-font, "mobile", "small-header", "font-size");
+    line-height: get-header($customer-font, "mobile", "small-header", "line-height");
+    font-weight: get-header($customer-font, "mobile", "small-header", "font-weight");
+}
+
+@include set-header($customer-tiny-header) {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "tiny-header", "font-size");
+        line-height: get-header($customer-font, "desktop", "tiny-header", "line-height");
+        font-weight: get-header($customer-font, "desktop", "tiny-header", "font-weight");
+    }
+    font-size: get-header($customer-font, "mobile", "tiny-header", "font-size");
+    line-height: get-header($customer-font, "mobile", "tiny-header", "line-height");
+    font-weight: get-header($customer-font, "mobile", "tiny-header", "font-weight");
+}
+
+@include set-header($customer-subhead) {
+    @include breakpoint(sm) {
+        font-size: get-header($customer-font, "desktop", "subhead", "font-size");
+        line-height: get-header($customer-font, "desktop", "subhead", "line-height");
+        font-weight: get-header($customer-font, "desktop", "subhead", "font-weight");
+    }
+    font-size: get-header($customer-font, "mobile", "subhead", "font-size");
+    line-height: get-header($customer-font, "mobile", "subhead", "line-height");
+    font-weight: get-header($customer-font, "mobile", "subhead", "font-weight");
+}
+
+//////////////////////////
+/// Prospect
+//////////////////////////
+$prospect-extra-extra-large-header: (".extra-extra-large-header");
+$prospect-extra-large-header: ("h1", ".h1", ".extra-large-header");
+$prospect-large-header: ("h2", ".h2", ".large-header");
+$prospect-small-header: ("h3", ".h3", ".small-header");
+$prospect-subhead: ("h4", "h5", "h6", ".h4", ".h5", ".h6", ".subhead");
+
+@include prospect() {
+    body {
+        @include breakpoint(sm) {
+            font-size: get-header($prospect-font, "desktop", "body", "font-size");
+            font-weight: get-header($prospect-font, "desktop", "body", "font-weight");
+            line-height: get-header($prospect-font, "desktop", "body", "line-height");
+        }
+        font-size: get-header($prospect-font, "mobile", "body", "font-size");
+        font-weight: get-header($prospect-font, "mobile", "body", "font-weight");
+        line-height: get-header($prospect-font, "mobile", "body", "line-height");
+    }
+    @include set-header($prospect-extra-extra-large-header) {
+        @include breakpoint(sm) {
+            font-size: get-header($prospect-font, "desktop", "extra-extra-large-header", "font-size");
+            line-height: get-header($prospect-font, "desktop", "extra-extra-large-header", "line-height");
+            font-weight: get-header($prospect-font, "desktop", "extra-extra-large-header", "font-weight");
+            letter-spacing: get-header($prospect-font, "desktop", "extra-extra-large-header", "letter-spacing");
+        }
+        font-size: get-header($prospect-font, "mobile", "extra-extra-large-header", "font-size");
+        line-height: get-header($prospect-font, "mobile", "extra-extra-large-header", "line-height");
+        font-weight: get-header($prospect-font, "mobile", "extra-extra-large-header", "font-weight");
+        letter-spacing: get-header($prospect-font, "mobile", "extra-extra-large-header", "letter-spacing");
+    }
+    @include set-header($prospect-extra-large-header) {
+        @include breakpoint(sm) {
+            font-size: get-header($prospect-font, "desktop", "extra-large-header", "font-size");
+            line-height: get-header($prospect-font, "desktop", "extra-large-header", "line-height");
+            font-weight: get-header($prospect-font, "desktop", "extra-large-header", "font-weight");
+            letter-spacing: get-header($prospect-font, "desktop", "extra-large-header", "letter-spacing");
+        }
+        font-size: get-header($prospect-font, "mobile", "extra-large-header", "font-size");
+        line-height: get-header($prospect-font, "mobile", "extra-large-header", "line-height");
+        font-weight: get-header($prospect-font, "mobile", "extra-large-header", "font-weight");
+        letter-spacing: get-header($prospect-font, "mobile", "extra-large-header", "letter-spacing");
+    }
+    @include set-header($prospect-large-header) {
+        @include breakpoint(sm) {
+            font-size: get-header($prospect-font, "desktop", "large-header", "font-size");
+            line-height: get-header($prospect-font, "desktop", "large-header", "line-height");
+            font-weight: get-header($prospect-font, "desktop", "large-header", "font-weight");
+            letter-spacing: get-header($prospect-font, "desktop", "large-header", "letter-spacing");
+        }
+        font-size: get-header($prospect-font, "mobile", "large-header", "font-size");
+        line-height: get-header($prospect-font, "mobile", "large-header", "line-height");
+        font-weight: get-header($prospect-font, "mobile", "large-header", "font-weight");
+        letter-spacing: get-header($prospect-font, "mobile", "large-header", "letter-spacing");
+    }
+    @include set-header($prospect-small-header) {
+        @include breakpoint(sm) {
+            font-size: get-header($prospect-font, "desktop", "small-header", "font-size");
+            line-height: get-header($prospect-font, "desktop", "small-header", "line-height");
+            font-weight: get-header($prospect-font, "desktop", "small-header", "font-weight");
+            letter-spacing: get-header($prospect-font, "desktop", "small-header", "letter-spacing");
+        }
+        font-size: get-header($prospect-font, "mobile", "small-header", "font-size");
+        line-height: get-header($prospect-font, "mobile", "small-header", "line-height");
+        font-weight: get-header($prospect-font, "mobile", "small-header", "font-weight");
+        letter-spacing: get-header($prospect-font, "mobile", "small-header", "letter-spacing");
+    }
+    @include set-header($prospect-subhead) {
+        @include breakpoint(sm) {
+            font-size: get-header($prospect-font, "desktop", "subhead", "font-size");
+            line-height: get-header($prospect-font, "desktop", "subhead", "line-height");
+            font-weight: get-header($prospect-font, "desktop", "subhead", "font-weight");
+        }
+        font-size: get-header($prospect-font, "mobile", "subhead", "font-size");
+        line-height: get-header($prospect-font, "mobile", "subhead", "line-height");
+        font-weight: get-header($prospect-font, "mobile", "subhead", "font-weight");
+    }
+}

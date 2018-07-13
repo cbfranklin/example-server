@@ -1,0 +1,10 @@
+@include vertical-offset("base", $spacing-base);
+@include vertical-offset("xxs", $spacing-xxs);
+@include vertical-offset("xs", $spacing-xs);
+@include vertical-offset("sm", $spacing-sm);
+@include vertical-offset("md", $spacing-md);
+@include vertical-offset("lg", $spacing-lg);
+@include vertical-offset("xl", $spacing-xl);
+@include vertical-offset("xxl", $spacing-xxl);
+@include vertical-offset("xxxl", $spacing-xxxl);
+@include vertical-offset("clear", $spacing-clear);

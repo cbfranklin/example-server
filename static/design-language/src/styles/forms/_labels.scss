@@ -1,0 +1,97 @@
+$label-font-size-mobile: 15px;
+
+/// customer is default
+label,
+time,
+label.label-small,
+.label.label-small,
+.label-small,
+.timestamp {
+    @include breakpoint-sm() {
+        font-size: 11px;
+    }
+    color: $ghost-color;
+    font-size: $label-font-size-mobile;
+    font-weight: $font-weight-normal;
+}
+
+time,
+.timestamp,
+label.label-large,
+.label.label-large,
+.label-large,
+.label.label-inline,
+label.label-inline {
+    @include breakpoint-sm() {
+        font-size: $font-size-base;
+    }
+    font-weight: $font-weight-light;
+    font-size: $label-font-size-mobile;
+}
+
+@include deprecate('1.0.0', '.label-lg has been depercated in favor of .label-large. Please use .label-large') {
+    label.label-lg,
+    .label.label-lg {
+        @include breakpoint-sm() {
+            font-size: $font-size-base;
+        }
+        font-weight: $font-weight-light;
+        font-size: $label-font-size-mobile;
+    }
+};
+
+.label.label-inline,
+label.label-inline {
+    display: inline-block;
+}
+
+.label {
+    @extend label;
+    padding: 0;
+}
+
+.checkbox > input[type='checkbox'] + label,
+.radio > input[type='radio'] + label,
+.checkbox > input[type='checkbox'] + .label,
+.radio > input[type='radio'] + .label {
+    @include breakpoint-sm() {
+        font-size: $font-size-base;
+    }
+    font-size: $label-font-size-mobile;
+}
+
+/// labels in dark mode - color should be white when using the dark theme, therefor this is important
+// sass-lint:disable-all
+label#{$dark-theme-class-name},
+time#{$dark-theme-class-name},
+label.label-small#{$dark-theme-class-name},
+.label.label-small#{$dark-theme-class-name},
+.label-small#{$dark-theme-class-name},
+label.label-large#{$dark-theme-class-name},
+.label.label-large#{$dark-theme-class-name},
+.lable-large#{$dark-theme-class-name},
+.timestamp#{$dark-theme-class-name},
+#{$dark-theme-class-name} label,
+#{$dark-theme-class-name} time,
+#{$dark-theme-class-name} label.label-small,
+#{$dark-theme-class-name} .label.label-small,
+#{$dark-theme-class-name} .label-small,
+#{$dark-theme-class-name} label.label-large,
+#{$dark-theme-class-name} .label.label-large,
+#{$dark-theme-class-name} .lable-large,
+#{$dark-theme-class-name} .timestamp {
+    color: $white;
+}
+// sass-lint:enable-all
+
+@include prospect() {
+    label,
+    .timestamp,
+    time {
+        @include breakpoint-sm() {
+            font-size: $font-size-base;
+        }
+        font-size: 15px;
+        font-weight: $font-weight-normal;
+    }
+}

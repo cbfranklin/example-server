@@ -1,0 +1,27 @@
+/// Placeholder text mixin, from vanilla bootstrap, added font-weight option
+@mixin placeholder($color: $input-color-placeholder, $font-weight: $font-weight-normal) {
+    // sass-lint:disable-all
+    // Firefox
+    &::-moz-placeholder {
+        color: $color;
+        font-weight: $font-weight;
+        opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+    }
+    &:-ms-input-placeholder {
+        color: $color;
+        font-weight: $font-weight;
+        line-height: 175%;
+    } // Internet Explorer 10+
+    &::-webkit-input-placeholder {
+        color: $color;
+        font-weight: $font-weight;
+    } // Safari and Chrome
+    // sass-lint:enable-all
+}
+
+@function dropdown-icon($color: $body-text-color) {
+    $icon: "<svg width='12px' height='10px' viewBox='258 91 12 10' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><g id='chevron-right' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' transform='translate(264.000000, 96.000000) rotate(90.000000) translate(-264.000000, -96.000000) translate(260.500000, 90.000000)'><polygon id='Shape' fill='#{$color}' points='1 0 -0.4 1.4 4.2 6 -0.4 10.6 1 12 7 6'></polygon></g></svg>";
+    // $prefix: "data:image/svg+xml;utf8,";
+    @return svg-uri($icon);
+    // @return "data:image/svg+xml,%3Csvg%20width%3D%2212px%22%20height%3D%2210px%22%20viewBox%3D%22258%2091%2012%2010%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%0A%20%20%20%20%3Cg%20id%3D%22chevron-right%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%20transform%3D%22translate%28264.000000%2C%2096.000000%29%20rotate%2890.000000%29%20translate%28-264.000000%2C%20-96.000000%29%20translate%28260.500000%2C%2090.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%3Cpolygon%20id%3D%22Shape%22%20fill%3D%22#{$color}%22%20points%3D%221%200%20-0.4%201.4%204.2%206%20-0.4%2010.6%201%2012%207%206%22%3E%3C/polygon%3E%0A%20%20%20%20%3C/g%3E%0A%3C/svg%3E"
+}

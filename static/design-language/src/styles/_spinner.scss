@@ -1,0 +1,114 @@
+/// spinner sizes
+$spinner-size: 110px;
+/// spinner colors
+$spinner-color-1: $brand-purple;
+$spinner-color-2: $brand-green;
+.spinner {
+    position: relative;
+    margin: 0 auto;
+    width: $spinner-size;
+    &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
+    svg.circular {
+        @include gt-ie-9() {
+            /// Internet Explorer doesn't render SVG animations, so we speed up the spin.
+            // sass-lint:disable-all
+            animation: rotate 1.5s linear infinite !important;
+            // sass-lint:enable-all
+        }
+        @include ie-edge() {
+            /// Internet Explorer doesn't render SVG animations, so we speed up the spin.
+            // sass-lint:disable-all
+            animation: rotate 1.5s linear infinite !important;
+            // sass-lint:enable-all
+        }
+        animation: rotate 2s linear infinite;
+        height: 100%;
+        transform-origin: center center;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        circle.path {
+            /// Internet Explorer doesn't render SVG animations, so we make it a static spin.
+            @include gt-ie-9() {
+                stroke-dasharray: 115, 200;
+            }
+            @include ie-edge() {
+                stroke-dasharray: 115, 200;
+                animation: none;
+            }
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            animation: dash 2s ease-in-out infinite,
+            spinner 4s ease-in-out infinite;
+            stroke: $brand-green;
+        }
+        circle.background {
+            stroke: rgba($background-color, 0.2);
+        }
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 0, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 125, 200;
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dasharray: 125, 200;
+        stroke-dashoffset: -125px;
+    }
+}
+
+@keyframes spinner {
+    100%,
+    0%,
+    49% {
+        stroke: $spinner-color-1;
+    }
+    50%,
+    99% {
+        stroke: $spinner-color-2;
+    }
+}
+
+/// center modal on all breakpoints if its for the spinner
+.modal.modal-spinner {
+    text-align: center;
+    padding: 0;
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+    // make modal transparent
+    .modal-content {
+        background: transparent;
+        border: 0;
+    }
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+}

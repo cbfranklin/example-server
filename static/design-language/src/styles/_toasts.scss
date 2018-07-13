@@ -1,0 +1,94 @@
+$toast-background-opacity: 0.9;
+$toast-z-index: 99999;
+$toast-default-background-color: rgba($brand-navy, $toast-background-opacity);
+$toast-success-background-color: rgba($positive, $toast-background-opacity);
+$toast-error-background-color: rgba($negative, $toast-background-opacity);
+$toast-info-background-color: rgba($link-color, $toast-background-opacity);
+$toast-text-color: $white;
+$toast-animation: cubic-bezier(0.67, -0.13, 0.0489, 1.265);
+
+.toast-container {
+    @include breakpoint(sm) {
+        top: 0;
+        left: 0;
+        bottom: initial;
+        height: 0;
+    }
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    top: initial;
+    left: 0;
+    width: 100%;
+    z-index: $toast-z-index;
+}
+
+.toast {
+    @include breakpoint(sm) {
+        transform: translateY(-1000%);
+    }
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    transform: translateY(1000%);
+    padding-top: 5px;
+    text-align: center;
+    &.toast-open {
+        opacity: 1;
+        transform: translateY(0%);
+        transition: all 0.45s $toast-animation;
+        .toast-content,
+        .toast-close {
+            transition: opacity 0.45s 0.1s linear;
+            opacity: 1;
+        }
+    }
+    .toast-content {
+        @include breakpoint(sm) {
+            margin: 15px auto 0 auto;
+        }
+        margin: 10px auto 0 auto;
+        text-align: left;
+        display: inline-block;
+        padding: 0 24px 18px 14px;
+        color: $toast-text-color;
+    }
+    .toast-close {
+        position: absolute;
+        opacity: 0;
+        z-index: 999992;
+        top: 0;
+        right: 0;
+        .btn .material-icons {
+            @include breakpoint(sm) {
+                font-size: 20px;
+            };
+            color: $toast-text-color;
+            font-size: 15px;
+            padding-left: 5px;
+            padding-top: 8px;
+        }
+    }
+    &.toast-success {
+        background-color: $toast-success-background-color;
+        .toast-content {
+            background-image: success-icon($toast-text-color);
+            background-repeat: no-repeat;
+            background-position: 10px -2px;
+            padding-left: 40px;
+        }
+    }
+    &.toast-error {
+        background: $toast-error-background-color;
+        .toast-content {
+            background-image: error-icon($toast-text-color);
+            background-repeat: no-repeat;
+            background-position: 12px -2px;
+            padding-left: 40px;
+        }
+    }
+    &.toast-info {
+        background: $toast-info-background-color;
+    }
+}

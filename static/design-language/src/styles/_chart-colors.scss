@@ -1,0 +1,104 @@
+// Chart colors
+$chart-colors: (
+    1: (
+        darker:   $chart-colors-1-darker,
+        base:     $chart-colors-1-base,
+        lighter:  $chart-colors-1-lighter,
+        lightest: $chart-colors-1-lightest
+    ),
+    2: (
+        darker:   $chart-colors-2-darker,
+        base:     $chart-colors-2-base,
+        lighter:  $chart-colors-2-lighter,
+        lightest: $chart-colors-2-lightest
+    ),
+    3: (
+        darker:   $chart-colors-3-darker,
+        base:     $chart-colors-3-base,
+        lighter:  $chart-colors-3-lighter,
+        lightest: $chart-colors-3-lightest
+    ),
+    4: (
+        darker:   $chart-colors-4-darker,
+        base:     $chart-colors-4-base,
+        lighter:  $chart-colors-4-lighter,
+        lightest: $chart-colors-4-lightest
+    ),
+    5: (
+        darker:   $chart-colors-5-darker,
+        base:     $chart-colors-5-base,
+        lighter:  $chart-colors-5-lighter,
+        lightest: $chart-colors-5-lightest
+    ),
+    6: (
+        darker:   $chart-colors-6-darker,
+        base:     $chart-colors-6-base,
+        lighter:  $chart-colors-6-lighter,
+        lightest: $chart-colors-6-lightest
+    ),
+    7: (
+        darker:   $chart-colors-7-darker,
+        base:     $chart-colors-7-base,
+        lighter:  $chart-colors-7-lighter,
+        lightest: $chart-colors-7-lightest
+    ),
+    8: (
+        darker:   $chart-colors-8-darker,
+        base:     $chart-colors-8-base,
+        lighter:  $chart-colors-8-lighter,
+        lightest: $chart-colors-8-lightest
+    ),
+    9: (
+        darker:   $chart-colors-9-darker,
+        base:     $chart-colors-9-base,
+        lighter:  $chart-colors-9-lighter,
+        lightest: $chart-colors-9-lightest
+    ),
+    10: (
+        darker:   $chart-colors-10-darker,
+        base:     $chart-colors-10-base,
+        lighter:  $chart-colors-10-lighter,
+        lightest: $chart-colors-10-lightest
+    ),
+    11: (
+        darker:   $chart-colors-11-darker,
+        base:     $chart-colors-11-base,
+        lighter:  $chart-colors-11-lighter,
+        lightest: $chart-colors-11-lightest
+    ),
+    positive: (
+        base:     $chart-color-positive
+    ),
+    negative: (
+        base:     $chart-color-negative
+    ),
+    neutral: (
+        base:     $chart-color-neutral
+    )
+);
+// Our function for map-get();
+// .class-name { background-color: chart-color(1, "lighter"); }
+@function chart-color($color-number, $hue-name: base) {
+    @return map-get(map-get($chart-colors, $color-number), $hue-name);
+}
+
+// generates helper classes for the chart colors:
+// .chart-color-NUMBER {
+//  .chart-color-NUMBER.color-SHADE {
+//      color: SHADE-COLOR
+//  }
+//  .chart-color-NUMBER.background-SHADE {
+//      background: SHADE-COLOR
+//  }
+//}
+@each $color-number, $hue-names in $chart-colors {
+    .chart-color-#{$color-number} {
+        background: map-get(map-get($chart-colors, $color-number), "base");
+        @each $hue-name,
+        $hue-hex in $hue-names {
+            &.chart-color-#{$hue-name} {
+                background: $hue-hex;
+            }
+        }
+    }
+}

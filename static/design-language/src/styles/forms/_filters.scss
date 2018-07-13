@@ -1,0 +1,41 @@
+$filter-border-width: 2px;
+$filter-selected-border: $filter-border-width solid $brand-green;
+$filter-border: $filter-border-width solid $border-color;
+$filter-color: $text-muted;
+$filter-selected-color: $body-text-color;
+$filter-background-color: $white;
+$filter-font-size-base: $font-size-base;
+$filter-font-size-xs: 15px;
+
+.filter-group {
+    width: 100%;
+    .filter {
+        display: inline-block;
+        position: relative;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        background: $filter-background-color;
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            &:checked+label {
+                border: $filter-selected-border;
+                color: $filter-selected-color;
+            }
+        }
+        label {
+            @include breakpoint-sm() {
+                font-size: $filter-font-size-base;
+            }
+            font-size: $filter-font-size-xs;
+            margin-bottom: 0;
+            display: block;
+            color: $filter-color;
+            border: $filter-border;
+            padding: 5px 15px;
+            user-select: none;
+        }
+    }
+}

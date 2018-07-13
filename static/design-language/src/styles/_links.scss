@@ -1,0 +1,189 @@
+$extend-link-color: $link-color;
+$extend-link-disabled-color: $link-disabled-color;
+$extend-link-active-color: $link-active-color;
+$extend-link-hover-color: $link-hover-color;
+$extend-link-text-muted: $text-muted;
+$extend-link-font-weight-normal: $font-weight-normal;
+$extend-link-font-weight-light: $font-weight-light;
+$extend-link-cursor-disabled: $cursor-disabled;
+$extend-link-icon-font-size: $link-icon-font-size;
+$extend-link-spacing-xxs: $spacing-xxs;
+$extend-link-dark-color: $link-dark-color;
+$extend-link-dark-disabled-color: $link-dark-disabled-color;
+$extend-link-dark-hover-color: $link-dark-hover-color;
+$extend-link-dark-active-color: $link-dark-active-color;
+
+%link {
+    color: $extend-link-color;
+    font-weight: $extend-link-font-weight-normal;
+    border: 0;
+    border-radius: 0;
+    &.disabled,
+    &[disabled],
+    &[disabled]:hover,
+    &.disabled:hover,
+    &[disabled]:active,
+    &.disabled:active,
+    &[disabled]:focus,
+    &.disabled:focus,
+    &.disabled:focus:hover,
+    &[disabled]:focus:hover {
+        // linting is disabled on disabled state because the font
+        // weight changes from the normal, for this case only
+        // sass-lint:disable-all
+        font-weight: $extend-link-font-weight-light !important;
+        // sass-lint:enable-all
+        cursor: $extend-link-cursor-disabled;
+        color: $extend-link-disabled-color;
+        pointer-events: none;
+        text-decoration: none;
+    }
+
+    &:active,
+    &.active {
+        color: $extend-link-active-color;
+        text-decoration: underline;
+    }
+
+    &:focus,
+    &.focus,
+    &:hover,
+    &.hover,
+    &:focus:hover {
+        color: $extend-link-active-color;
+        text-decoration: underline;
+    }
+
+    /// disabled linting because outline needs important.
+    /// this does not break WAVI since the outline is replaced
+    /// with an underline state for the link
+    // sass-lint:disable-all
+    &:active,
+    &:focus {
+        outline: 0 !important;
+    }
+    // sass-lint:enable-all
+
+    .material-icons {
+        margin-top: -3px;
+        font-size: $extend-link-icon-font-size;
+        text-decoration: none;
+        vertical-align: middle;
+        margin-right: $extend-link-spacing-xxs;
+    }
+
+    &:hover .material-icons,
+    &.hover .material-icons {
+        color: $extend-link-hover-color;
+    }
+
+    &[disabled]:hover .material-icons,
+    &.disabled:hover .material-icons,
+    &[disabled]:active .material-icons,
+    &.disabled:active .material-icons,
+    &[disabled]:focus .material-icons,
+    &.disabled:focus .material-icons,
+    &[disabled]:active:focus .material-icons,
+    &.disabled:active:focus .material-icons,
+    &[disabled].active .material-icons,
+    &.disabled.focus .material-icons {
+        color: $extend-link-disabled-color;
+    }
+
+    &:active .material-icons,
+    &.active .material-icons,
+    &:focus .material-icons,
+    &.focus .material-icons {
+        color: $extend-link-active-color;
+    }
+
+    // material icons when paired with .text-muted
+
+    &.text-muted:hover .material-icons,
+    &.text-muted.hover .material-icons {
+        color: $extend-link-text-muted;
+    }
+
+    &.text-muted[disabled]:hover .material-icons,
+    &.text-muted.disabled:hover .material-icons {
+        color: $extend-link-disabled-color;
+    }
+
+    &.text-muted:active .material-icons,
+    &.text-muted.active .material-icons,
+    &.text-muted:focus .material-icons,
+    &.text-muted.focus .material-icons {
+        color: $extend-link-text-muted;
+    }
+}
+
+%link-dark {
+    color: $extend-link-dark-color;
+    &.disabled,
+    &[disabled],
+    &[disabled]:hover,
+    &.disabled:hover,
+    &[disabled]:active,
+    &.disabled:active,
+    &[disabled]:focus,
+    &.disabled:focus,
+    &.disabled:focus:hover,
+    &[disabled]:focus:hover {
+        text-decoration: none;
+        color: $extend-link-dark-disabled-color;
+    }
+
+    &:hover,
+    &:focus {
+        color: $extend-link-dark-hover-color;
+    }
+
+    &:active,
+    &.active {
+        color: $extend-link-dark-active-color;
+    }
+
+    &:focus,
+    &.focus,
+    &:focus:hover {
+        color: $extend-link-dark-active-color;
+    }
+
+    &:hover .material-icons,
+    &.hover .material-icons {
+        color: $extend-link-dark-hover-color;
+    }
+
+    &[disabled]:hover .material-icons,
+    &.disabled:hover .material-icons {
+        color: $extend-link-dark-disabled-color;
+    }
+
+    &:active .material-icons,
+    &.active .material-icons,
+    &:focus .material-icons,
+    &.focus .material-icons {
+        color: $extend-link-dark-active-color;
+    }
+}
+
+a {
+    @extend %link;
+}
+
+a#{$dark-theme-class-name},
+#{$dark-theme-class-name} a {
+    @extend %link-dark;
+}
+
+a.btn:not(.btn-link) {
+    text-decoration: none;
+}
+a[disabled],
+a.disabled {
+    color: $link-disabled-color;
+}
+
+a:active {
+    color: $link-active-color;
+}

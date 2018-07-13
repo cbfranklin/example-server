@@ -1,0 +1,247 @@
+// Styling for cards
+$card-border-radius: 2px;
+$card-primary-background: $white;
+$card-primary-border: 1px solid $background-color;
+$card-primary-border-color: $background-color;
+$card-secondary-background: $background-color;
+$card-secondary-border: 1px solid $background-color;
+$card-padding: 30px;
+$card-consensed-padding: $card-padding / 2;
+$card-accent-height: 5px;
+$card-full-width: calc(100% + 2px);
+
+@mixin full-width-card() {
+    left: -1px;
+    width: $card-full-width;
+    position: absolute;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    padding: $card-padding;
+    border-radius: $card-border-radius;
+
+    &.card-compact {
+        padding: $card-consensed-padding;
+        &>img {
+            margin-left: (-$card-padding / 2);
+            margin-top: (-$card-padding / 2);
+            &:last-child {
+                margin-left: (-$card-padding / 2);
+                margin-top: (-$card-padding / 2);
+            }
+        }
+        &:not(.card-background-image)>img {
+            $card-image-width: $card-padding;
+            width: calc(100% + #{$card-image-width});
+        }
+    }
+
+    &.card-primary {
+        background: $card-primary-background;
+        border: $card-primary-border;
+    }
+
+    &.card-secondary {
+        background: $card-secondary-background;
+        border: $card-secondary-border;
+    }
+    &.card-background-image {
+        overflow: hidden;
+        z-index: 0;
+        .card-body,
+        .card-footer {
+            z-index: 1;
+        }
+        img {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            min-width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+    }
+    &>img {
+        margin-left: -$card-padding;
+        margin-top: -$card-padding;
+        &:last-child {
+            margin-bottom: -$card-padding;
+            margin-top: $card-padding;
+        }
+    }
+    &:not(.card-background-image)>img {
+        $card-image-width: $card-padding * 2;
+        width: calc(100% + #{$card-image-width});
+    }
+    .accent {
+        @include full-width-card();
+        top: -1px;
+        height: $card-accent-height;
+        border-top-left-radius: $card-border-radius;
+        border-top-right-radius: $card-border-radius;
+        &.brand-green {
+            background: $brand-green;
+        }
+        &.brand-purple {
+            background: $brand-purple;
+        }
+    }
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+    }
+    // for a full width button, with no card padding
+    .card-footer > .btn-block {
+        @include full-width-card();
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        bottom: 0;
+    }
+    .btn {
+        margin: 0;
+    }
+}
+
+a,
+a:hover,
+a:focus,
+a:visited,
+a:active,
+a:hover:focus,
+a:active:focus {
+    &.card {
+        color: inherit;
+        text-decoration: inherit;
+    }
+
+    & .material-icons {
+        color: inherit;
+    }
+}
+
+a:focus.card,
+a:focus:active.card {
+    border: 1px solid rgba($link-color, 0.5);
+}
+
+#{$dark-theme-class-name} .card-group,
+.card-group#{$dark-theme-class-name},
+#{$dark-theme-class-name} .card,
+#{$dark-theme-class-name}.card,
+#{$dark-theme-class-name} a.card,
+#{$dark-theme-class-name} a.card {
+    color: $body-text-color;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    .extra-extra-large-header,
+    .extra-large-header,
+    .large-header,
+    .medium-header,
+    .small-header,
+    .subhead {
+        color: $header-text-color;
+    }
+
+    /*.btn-primary-outline {
+        @include button-outline-variant($btn-primary-color, $btn-primary-color-hover, $btn-primary-color-active);
+    }*/
+
+    & .material-icons {
+        color: inherit;
+    }
+
+    %link-dark {
+        @extend %link;
+    }
+}
+
+.card-group {
+    position: relative; // these margins make up for a card-group not being part of a row
+    margin-left: -10px;
+    margin-right: -10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch; // Helper classes for left/right alignment
+    &.card-group-left {
+        justify-content: flex-start;
+    }
+
+    &.card-group-center {
+        justify-content: center;
+    }
+
+    &.card-group-right {
+        justify-content: flex-end;
+    } // cards in a group, space around each card
+    .card {
+        margin: 10px;
+    }
+}
+
+@include deprecate('0.0.8', '.card-left has been deprecated. Please use .card-group-left') {
+    .card-group.card-left {
+        justify-content: flex-start;
+    }
+}
+@include deprecate('0.0.8', '.card-center has been deprecated. Please use .card-group-center') {
+    .card-group.card-center {
+        justify-content: center;
+    }
+}
+@include deprecate('0.0.8', '.card-right has been deprecated. Please use .card-group-right') {
+    .card-group.card-right {
+        justify-content: flex-end;
+    }
+}
+
+// if a card-group is wrapped in a row, do not apply the margins
+.row>.card-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+// Helper classes for widths i.e. flex-sm-6, flex-lg-3
+$breakpoints: "xs", "sm", "md", "lg";
+
+@each $breakpoint in $breakpoints {
+    @for $i from 1 through 12 {
+        $calculated-width: $i / 12 * 100;
+        $flex-width: calc(#{$calculated-width}% - 20px);
+
+        .flex-#{$breakpoint}-#{$i} {
+            @if $breakpoint == "xs" {
+                width: $flex-width;
+            }
+            @else {
+                @include breakpoint($breakpoint) {
+                    width: $flex-width;
+                }
+            }
+        }
+    }
+}

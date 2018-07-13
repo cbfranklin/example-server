@@ -1,0 +1,40 @@
+// Make columns classes for variable-sized grid
+@mixin make-grid-var-columns($num, $i: 1, $list: ".col-grid#{$num}-xs-#{$i}, .col-grid#{$num}-sm-#{$i}, .col-grid#{$num}-md-#{$i}, .col-grid#{$num}-lg-#{$i}") {
+    @for $i from 2 through $grid-columns {
+        $list: "#{$list}, .col-grid#{$num}-xs-#{$i}, .col-grid#{$num}-sm-#{$i}, .col-grid#{$num}-md-#{$i}, .col-grid#{$num}-lg-#{$i}";
+    }
+    #{$list} {
+        position: relative;
+        // Prevent columns from collapsing when empty
+        min-height: 1px;
+        // Inner gutter via padding
+        padding-left:  ceil(($grid-gutter-width / 2));
+        padding-right: floor(($grid-gutter-width / 2));
+    }
+}
+
+
+@mixin make-adjusted-grid($columns) {
+    .row-grid-#{$columns} {
+        // Common styles for small and large grid columns
+        @include make-grid-var-columns($columns);
+
+        // Extra small grid
+        @include make-grid(xs);
+
+        // Small grid
+        @include breakpoint-sm()  {
+            @include make-grid(sm);
+        }
+
+        // Medium grid
+        @include breakpoint-md()  {
+            @include make-grid(md);
+        }
+
+        // Large grid
+        @include breakpoint-lg()  {
+            @include make-grid(lg);
+        }
+    }
+}

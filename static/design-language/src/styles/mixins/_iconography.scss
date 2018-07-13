@@ -1,0 +1,43 @@
+@mixin et-icons() {
+    font-family: 'ET Iconography';
+    speak: none;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    // sass-lint:disable-all
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    pointer-events: none;
+    // sass-lint:enable-all
+}
+
+@mixin et-icon($name) {
+    .et-icon.et-#{$name} {
+        background: url('#{$iconography-path}#{$name}-icon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+    #{$dark-theme-class-name} .et-icon.et-#{$name},
+    .et-icon.et-#{$name}#{$dark-theme-class-name} {
+        background: url('#{$iconography-path}inverse/#{$name}-icon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+}
+
+@function social-icon($platform: facebook) {
+    @return svg-uri(map-get($social-icons, $platform));
+}

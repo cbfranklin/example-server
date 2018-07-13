@@ -1,0 +1,37 @@
+// Button sizes
+@mixin button-sizing($padding, $font-size) {
+    padding: $padding;
+    font-size: $font-size;
+    line-height: $font-size;
+}
+
+@mixin button-type(
+    $color, $color-hover, $color-active, $color-disabled,
+    $background-color, $background-color-hover, $background-color-active, $background-color-disabled,
+    $border-color, $border-color-hover, $border-color-active, $border-color-disabled) {
+
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    &:hover {
+        color: $color-hover;
+        background-color: $background-color-hover;
+        border-color: $border-color-hover;
+    }
+    &:active,
+    &:focus,
+    &:focus:hover {
+        color: $color-active;
+        background-color: $background-color-active;
+        border-color: $border-color-active;
+        outline-offset: -2px;
+    }
+    &:disabled,
+    &[disabled] {
+        font-weight: $btn-font-weight-disabled;
+        color: $color-disabled;
+        background-color: $background-color-disabled;
+        border-color: $border-color-disabled;
+        cursor: $cursor-disabled;
+    }
+}

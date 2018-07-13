@@ -1,0 +1,23 @@
+$unordered-list-margin-right: $spacing-xs;
+
+ul {
+    padding: 0 0 0 20px;
+    li {
+        padding: 0 0 10px 20px;
+    }
+}
+
+ul.list-pipe {
+    @include list-unstyled();
+    margin: 0;
+    padding: 0;
+    li {
+        display: inline-block;
+        padding-left: 5px;
+        padding-right: 5px;
+        & + li:before {
+            content: " | ";
+            margin-right: $unordered-list-margin-right;
+        }
+    }
+}

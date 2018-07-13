@@ -1,0 +1,108 @@
+// colors
+$font-body-text-color:        $body-text-color;
+// font family
+$mobile-font-family-ios:      $font-family-ios;
+$mobile-font-family-android:  $font-family-android;
+// font weight
+$mobile-font-weight-bold:     $font-weight-bold;
+$mobile-font-weight-normal:   $font-weight-normal;
+$mobile-font-weight-medium:   $font-weight-medium;
+$mobile-font-weight-light:    $font-weight-light;
+$mobile-font-weight-lighter:  $font-weight-lighter;
+$mobile-font-weight-lightest: $font-weight-lightest;
+
+@include deprecate("0.0.8", "iOS and Android font stacks on web have been deprecated. Please use the customer or prospect font stacks. See etrade.design/typography.") {
+
+    @include ios-android() {
+        .extra-large-header {
+            font-size: 50px;
+            font-weight: $mobile-font-weight-lightest;
+        }
+
+        h1,
+        .h1,
+        .large-header {
+            font-size: 23px;
+            font-weight: $mobile-font-weight-lighter;
+        }
+
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .h2,
+        .h3,
+        .h4,
+        .h5,
+        .h6,
+        .subhead,
+        .medium-header {
+            font-size: 17px;
+        }
+
+        h3,
+        .h3,
+        .medium-header {
+            font-weight: $mobile-font-weight-medium;
+            color: $font-body-text-color;
+        }
+        .medium-header {
+            // Question: should we add this?
+            // if not added the margin-bottom collapses if used on any inline element. like a span.
+            // we are not doing this on the other .medium-header
+            display: inline-block;
+        }
+        .text-disclaimer {
+            font-weight: $mobile-font-weight-normal;
+            /// text bold on mobile should show as a heavier weight
+            // sass-lint:disable-all
+            .text-bold, strong, b {
+                font-weight: $mobile-font-weight-bold !important;
+                color: $font-body-text-color;
+            }
+            // sass-lint:enable-all
+        }
+
+        .text-footer {
+            font-size: 13px;
+        }
+    }
+
+    @include ios {
+        font-family: $mobile-font-family-ios;
+        h2,
+        .h2,
+        .subhead {
+            font-weight: $mobile-font-weight-medium;
+        }
+
+        h4,
+        h5,
+        h6,
+        .h4,
+        .h5,
+        .h6 {
+            font-weight: $mobile-font-weight-normal;
+        }
+    }
+
+    @include android {
+        font-family: $mobile-font-family-android;
+        font-size: 17px;
+        h2,
+        .h2,
+        .large {
+            font-weight: $mobile-font-weight-bold;
+        }
+
+        h4,
+        h5,
+        h6,
+        .h4,
+        .h5,
+        .h6 {
+            font-weight: $mobile-font-weight-light;
+        }
+    }
+}

@@ -1,0 +1,207 @@
+$nav-tabs-animation-speed: 0.3s;
+$nav-tabs-font-size: $font-size-base;
+$nav-tabs-mobile-font-size: 18px;
+$nav-tabs-color: $text-muted;
+$nav-tabs-border-margin: 12px;
+$nav-tabs-border-thickness: 3px;
+$nav-tabs-active-color: $body-text-color;
+$nav-tabs-font-weight: $font-weight-light;
+$nav-tabs-hover-border-color: $border-color;
+$nav-tabs-active-border-color: $brand-green;
+$nav-tabs-bordered-border-color: $border-color;
+$nav-tabs-borered-hover-border-color: darken($border-color, 20%);
+$nav-tabs-dark-color: $white;
+$nav-tabs-dark-hover-border-color: $white;
+$nav-tabs-bordered-dark-border-color: #445173;
+.nav-tabs {
+    @include list-unstyled();
+    border-bottom: none;
+    overflow-x: auto;
+    overflow-y: none;
+    // sass-lint:disable-all
+    // disable linting here so that iOS smooth scrolls the nav tabs
+    -webkit-overflow-scrolling: touch; 
+    // disable linting here so that IE on xs screens can scroll
+    -ms-overflow-style: -ms-autohiding-scrollbar; 
+    // sass-lint:enable-all
+    margin: 0 0 10px -10px;
+    padding-left: 10px;
+    ul {
+        @include breakpoint-sm() {
+            display: block;
+        }
+        display: table;
+        width: 100%;
+        white-space: nowrap;
+        padding-left: 0;
+    }
+    li {
+        @include breakpoint-sm() {
+            display: inline-block;
+            text-align: left;
+        }
+        display: table-cell;
+        text-align: center;
+        padding: 0px 5px;
+        margin-right: 15px;
+        border-bottom: $nav-tabs-border-thickness solid transparent;
+        &:first-of-type {
+            padding-left: 0;
+        }
+        a {
+            @include gt-ie-9() {
+                padding: 2px;
+                display: inline-block;
+            }
+            @include breakpoint-sm() {
+                font-size: $nav-tabs-font-size;
+            }
+            display: inline-block;
+            position: relative;
+            font-size: $nav-tabs-mobile-font-size;
+            color: $nav-tabs-color;
+            font-weight: $nav-tabs-font-weight;
+            text-decoration: none;
+            // letter-spacing: .0095em;
+            &:hover,
+            &:active,
+            &:focus,
+            &:focus:hover {
+                color: inherit;
+                text-decoration: none;
+                &:after {
+                    border-bottom: $nav-tabs-border-thickness solid $nav-tabs-hover-border-color;
+                    transform: scaleX(1);
+                    opacity: 1;
+                    transition: all $nav-tabs-animation-speed ease-in-out;
+                }
+            }
+            &:after {
+                @include firefox() {
+                    margin-top: calc($nav-tabs-border-margin - 0.8px);
+                }
+                display: inline-block;
+                position: absolute;
+                margin-top: $nav-tabs-border-margin;
+                width: 100%;
+                height: 1em;
+                left: 0;
+                content: "";
+                border-bottom: $nav-tabs-border-thickness solid transparent;
+                transform: scaleX(0);
+                opacity: 0;
+                transition: all $nav-tabs-animation-speed ease-in-out;
+            }
+        }
+        &:hover a:after {
+            opacity: 1;
+            transform: scaleX(1.1);
+            border-bottom: $nav-tabs-border-thickness solid $nav-tabs-hover-border-color;
+        }
+
+    }
+    li.active {
+        a {
+            color: $nav-tabs-active-color;
+            font-weight: $font-weight-medium;
+            &:after {
+                border-bottom: $nav-tabs-border-thickness solid $nav-tabs-active-border-color;
+                transform: scaleX(1);
+                opacity: 1;
+                transition: all $nav-tabs-animation-speed ease-in-out;
+            }
+        }
+        &:hover a:after,
+        &:focus a:after {
+            opacity: 1;
+            transform: scaleX(1.1);
+            border-bottom: $nav-tabs-border-thickness solid $nav-tabs-active-border-color;
+        }
+        &:active a:after {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.nav-tabs.nav-tabs-md a {
+    font-size: 18px;
+}
+
+.nav-tabs.nav-tabs-lg a {
+    font-size: 22px;
+}
+
+.nav-tabs.nav-tabs-border {
+    ul {
+        @include breakpoint-sm() {
+            top: 0;
+            position: initial;
+            display: block;
+        }
+        display: inline-table;
+        position: relative;
+        &:after {
+            @include breakpoint-sm() {
+                margin-top: 0;
+                position: initial;
+            }
+            @include firefox() {
+                @include breakpoint-sm() {
+                    margin-top: 1px;
+                }
+                margin-top: 4px;
+            }
+            margin-top: 3px;
+            top: 0;
+            content: "";
+            display: block;
+            border-bottom: $nav-tabs-border-thickness solid $nav-tabs-bordered-border-color;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 2.5px;
+            z-index: -1;
+        }
+        li:not(.active) a:hover:after {
+            border-bottom: $nav-tabs-border-thickness solid $nav-tabs-borered-hover-border-color;
+        }
+    }
+}
+
+/// Fort has a weird line height going on, so we add this to adjust the nav tabs bordered variation to align properly.
+@include prospect() {
+    .nav-tabs.nav-tabs-border {
+        ul:after {
+            @include firefox() {
+                @include breakpoint-sm() {
+                    margin-top: 0.5px;
+                }
+                margin-top: 1.5px;
+            }
+            margin-top: 1px;
+        }
+    }
+}
+
+/// allow <div class="$dark-theme-class-name"><div class="nav-tabs">... to apply the dark theme automagically
+/// but still allow for a specificity of .nav-tabs.$dark-theme-class-name
+#{$dark-theme-class-name} .nav-tabs,
+.nav-tabs#{$dark-theme-class-name} {
+    li a,
+    li a:active,
+    li a:focus {
+        color: $nav-tabs-dark-color;
+    }
+    ul li:not(.active) a:hover:after {
+        border-bottom: $nav-tabs-border-thickness solid $nav-tabs-dark-hover-border-color;
+    }
+    &.nav-tabs-border {
+        ul {
+            z-index: 1;
+            &:after {
+                border-bottom: $nav-tabs-border-thickness solid $nav-tabs-bordered-dark-border-color;
+                z-index: -1;
+            }
+        }
+    }
+}

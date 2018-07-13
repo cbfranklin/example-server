@@ -1,0 +1,114 @@
+$disclaimer-logos: (
+    equal-housing-lender: (
+        height: 30px,
+        width: 31px
+    ),
+    etrade-protection: (
+        height: 30px,
+        width: 172px
+    ),
+    fdic-member: (
+        height: 30px,
+        width: 159px
+    ),
+    sipc-member: (
+        height: 30px,
+        width: 288px
+    )
+);
+
+footer.footer {
+    padding: $spacing-xxl 0;
+    background: $background-color;
+    .text-disclaimer,
+    .text-disclaimer b,
+    .text-disclaimer strong,
+    .text-disclaimer .text-bold {
+        color: $body-text-color;
+    }
+    .quick-links ul li {
+        margin-top: $spacing-base;
+        padding-left: 0;
+    }
+}
+
+.social-icon {
+    height: 30px;
+    width: 30px;
+    background-color: $link-color;
+    display: inline-block;
+    border-radius: 30px;
+    &:hover {
+        background-color: $link-hover-color;
+    }
+    @each $social-icon,
+    $svg in $social-icons {
+        &.#{$social-icon} {
+            background-image: svg-uri($svg);
+        }
+    }
+}
+
+.disclaimer-icon {
+    display: inline-block;
+    margin-right: 40px;
+    @each $disclaimer-logo, $property in $disclaimer-logos {
+        &.#{$disclaimer-logo} {
+            background: url('images/disclaimer-logo-#{$disclaimer-logo}.svg');
+            height: #{map-get(map-get($disclaimer-logos, $disclaimer-logo), height)};
+            width: #{map-get(map-get($disclaimer-logos, $disclaimer-logo), width)};
+        }
+    }
+}
+
+footer#{$dark-theme-class-name},
+#{$dark-theme-class-name} footer {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    .extra-extra-large-header,
+    .extra-large-header,
+    .large-header,
+    .small-header,
+    .subhead {
+        color: $body-text-color;
+    }
+    .text-disclaimer {
+        color: $body-text-color;
+        .text-bold,
+        b,
+        strong {
+            color: $body-text-color;
+        }
+        a,
+        .btn.btn-link,
+        a > .text-bold,
+        a > b,
+        a > strong,
+        .btn.btn-link > .text-bold,
+        .btn.btn-link > b,
+        .btn.btn-link > strong {
+            color: $link-color;
+            &:hover {
+                color: $link-hover-color;
+            }
+        }
+    }
+
+    a,
+    .btn.btn-link {
+        color: $link-color;
+        &:hover {
+            color: $link-hover-color;
+        }
+    }
+}

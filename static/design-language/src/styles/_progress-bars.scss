@@ -1,0 +1,45 @@
+$progress-bar-height: 5px;
+$progress-bar-line-height: $progress-bar-height;
+$progress-bar-margin-bottom: $spacing-xs;
+// $progress-bar-border-radius: 0;
+$progress-bar-background-color: $background-color;
+$progress-bar-text-color: $white;
+$progress-bar-progress-color: $brand-green;
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+// Bar itself
+// -------------------------
+// Outer container
+.progress {
+    overflow: hidden;
+    height: $progress-bar-height;
+    margin-bottom: $progress-bar-margin-bottom;
+    background-color: $progress-bar-background-color;
+    // border-radius: $progress-bar-border-radius;
+    // Bar of progress
+    .progress-bar {
+        transition: width .6s ease;
+        float: left;
+        width: 0%;
+        height: 100%;
+        font-size: $font-size-small;
+        line-height: $progress-bar-line-height;
+        color: $progress-bar-color;
+        text-align: center;
+        background-color: $progress-bar-progress-color;
+        &.progress-bar-striped {
+            @include gradient-striped;
+            background-size: 40px 40px;
+        }
+        &.active {
+            animation: progress-bar-stripes 2s linear infinite;
+        }
+    }
+}

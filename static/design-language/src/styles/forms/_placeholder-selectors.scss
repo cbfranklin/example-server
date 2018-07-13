@@ -1,0 +1,55 @@
+%default-input {
+    background: none;
+    position: absolute;
+    opacity: 0;
+    margin-left: 0;
+    cursor: pointer;
+    &[disabled] {
+        cursor: $cursor-disabled;
+    }
+    & + label {
+        user-select: none;
+        padding-left: 25px;
+        font-size: $font-size-base;
+    }
+    & + label:before {
+        @include material-icons();
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        vertical-align: middle;
+        font-size: 14px;
+        color: $white;
+        border: 1px solid $border-color;
+    }
+    &[disabled] + label:before {
+        background-color: $background-inactive-color;
+        color: $background-inactive-color;
+    }
+    &[disabled]:checked + label:before {
+        background-color: $background-inactive-color;
+        border: 1px solid $border-color;
+        color: $background-inactive-color;
+    }
+    &:focus, &[disabled]:focus {
+        & + label:before {
+            border: 1px solid $brand-green;
+        }
+    }
+    &:checked:focus + label:before {
+        border: 1px solid $border-color;
+    }
+    &[disabled] + label:hover {
+        cursor: $cursor-disabled;
+    }
+}
+
+/// remove the left padding so the radio and checkbox are flush against the left side of the column
+.radio label, .checkbox label, .radio-inline {
+    padding-left: 0;
+}
+
+/// set radio and checkbox classes to no margins, spacing is determined by .vertical-offset-SIZE
+.radio, .checkbox, .toggle-button {
+    margin: $component-margins;
+}

@@ -1,0 +1,17 @@
+@mixin responsive-container() {
+    @include container-fixed();
+    width: 100%;
+    max-width: $screen-lg-min;
+    @media (min-device-width: $screen-md-min) {
+        min-width: $screen-md-min;
+    }
+}
+
+// Centered container element
+@mixin container-fixed($gutter: $grid-gutter-width) {
+    @include clearfix();
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: ($gutter / 2);
+    padding-right: ($gutter / 2);
+}

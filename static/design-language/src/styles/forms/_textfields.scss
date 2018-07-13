@@ -1,0 +1,231 @@
+$field-icon-color: $border-color;
+$field-icon-textfield-initial-padding: 15px;
+
+.form-control {
+    @include breakpoint-sm {
+        height: 33px;
+    }
+
+
+    @include placeholder($ghost-color, $font-weight-light);
+    @include gt-ie-9 {
+        line-height: 175%;
+    }
+
+
+    font-weight: $font-weight-normal;
+    border-width: 1px;
+    box-shadow: none;
+    appearance: none;
+    height: 47px;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.form-group {
+    margin-bottom: $spacing-base;
+
+    label.field-status {
+        margin-bottom: $spacing-xs;
+    }
+}
+
+.form-icon-group {
+    position: relative;
+
+    & > .material-icons:first-child {
+        left: 0;
+        right: initial;
+    }
+
+    & > .material-icons:last-child {
+        right: 0;
+        left: initial;
+    }
+
+    // if the form control is the first child but not the last child
+    // this means we can assume there is an icon on the right.
+    .form-control:first-child:not(:last-child) {
+        @include breakpoint-sm {
+            padding-right: 40px;
+        }
+        padding-right: 50px;
+    }
+
+    // if the form control is the last child but not the first child
+    // this means we can assume there is an an icon on the left.
+    .form-control:last-child:not(:first-child) {
+        @include breakpoint-sm {
+            padding-left: 40px;
+        }
+        padding-left: 50px;
+    }
+
+    // if the form control is neither the first or last child
+    // we can assume there are two icon between it.
+    .form-control:not(:last-child):not(:first-child) {
+        @include breakpoint-sm {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .material-icons {
+        @include breakpoint-sm {
+            line-height: 33px;
+            font-size: 24px;
+        }
+
+
+        color: $field-icon-color;
+        position: absolute;
+        line-height: 47px;
+        font-size: 32px;
+        pointer-events: none;
+        z-index: 1;
+        padding: 0 10px;
+        top: 0;
+    }
+}
+
+@include deprecate("0.0.8", "The textfield + icon pattern has changed markup specifications significantly. See http://etrade.design/form-elements#text-fields-icons for updated markup.") {
+    .form-group.form-group-icon {
+        position: relative;
+
+        label {
+            width: 100%;
+        }
+
+        .material-icons {
+            @include breakpoint-sm {
+                top: 23px;
+                font-size: 24px;
+                line-height: 33px;
+                width: 33px;
+                height: 33px;
+            }
+
+
+            position: absolute;
+            top: 26px;
+            color: $field-icon-color;
+            font-size: 32px;
+            line-height: 47px;
+            width: 37px;
+            height: 47px;
+            pointer-events: none;
+        }
+
+        &.icon-left {
+            .form-control {
+                @include breakpoint-sm {
+                    padding-left: 35px;
+                    &:focus {
+                        padding-left: 32px;
+                    }
+                }
+                padding-left: 45px;
+            }
+
+            .material-icons {
+                left: 7px;
+
+                &.right-icon {
+                    @include breakpoint-sm {
+                        left: calc(100% - 33px);
+                    }
+
+
+                    left: calc(100% - 40px);
+                }
+            }
+        }
+
+        &.icon-right {
+            .form-control {
+                @include breakpoint-sm {
+                    padding-right: 35px;
+                }
+
+
+                padding-right: 45px;
+            }
+
+            .material-icons {
+                right: 0;
+            }
+        }
+    }
+}
+
+
+.form-group.has-error {
+    .form-control {
+        border-color: $negative;
+        box-shadow: none;
+
+        &:focus {
+            border-color: $brand-green;
+            box-shadow: none;
+        }
+    }
+
+    label.field-status {
+        color: $negative;
+    }
+}
+
+#{$dark-theme-class-name} .form-group.has-error,
+.form-group.has-error#{$dark-theme-class-name} {
+    .form-control {
+        border-color: $dark-theme-negative;
+    }
+
+    label.field-status {
+        color: $dark-theme-negative;
+    }
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+    color: $text-muted;
+    font-weight: $font-weight-light;
+    background-color: $background-color;
+    border-color: $background-color;
+    cursor: not-allowed;
+}
+
+label.field-status {
+    @include gt-ie-9 {
+        margin-top: 4px;
+    }
+
+
+    text-align: right;
+    width: 100%;
+    float: right;
+
+    &.error {
+        color: $negative;
+    }
+
+    &.success {
+        color: $positive;
+    }
+}
+
+/// prevent auto zooming on form elements on iOS
+@include ios-webkit {
+    .form-control {
+        /// this font size should not be overwritten when on iOS webkit to avoid zooming
+        // sass-lint:disable-all
+        font-size: 16px;
+        // sass-lint:enable-all
+    }
+}

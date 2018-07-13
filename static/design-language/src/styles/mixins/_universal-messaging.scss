@@ -1,0 +1,11 @@
+@mixin universal-message-variation($background, $icon, $icon-color) {
+    background-color: $background;
+    color: $body-text-color;
+    &:before {
+        content: $icon;
+        color: $icon-color;
+        position: absolute;
+        left: 10px;
+        top: 2px;
+    }
+}

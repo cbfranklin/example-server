@@ -1,0 +1,118 @@
+.modal .btn {
+    margin: 0;
+}
+
+.modal-content {
+    box-shadow: none;
+    border: 1px solid $border-color;
+    background-clip: border-box;
+    border-radius: 0;
+    padding: 30px 25px;
+    .modal-footer .btn + .btn {
+        margin-bottom: 10px;
+    }
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 0 0 15px 0;
+}
+
+.modal-body {
+    padding: 0 0 15px 0;
+}
+
+.modal-footer {
+    padding: 0;
+    text-align: initial;
+    border-top: none;
+}
+
+.modal-dialog button.close {
+    float: left;
+    right: 0;
+    position: absolute;
+    margin-right: 10px;
+    margin-top: -24px;
+}
+
+.modal-backdrop {
+    background-color: $modal-backdrop-bg;
+    &.in {
+        opacity: 0.8;
+    }
+    // @include gt-ie-9() {
+    //     background-color: $modal-backdrop-bg;
+    //     &.in {
+    //         opacity: 0.8;
+    //     }
+    // }
+    // @include ie-edge() {
+    //     background-color: $modal-backdrop-bg;
+    //     &.in {
+    //         opacity: 0.8;
+    //     }
+    // }
+}
+
+// center modal vertically
+@include breakpoint-sm() {
+    .modal {
+        text-align: center;
+        padding: 0;
+    }
+    .modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+    .modal-dialog,
+    .modal-md {
+        width: 630px;
+    }
+    .modal-sm {
+        width: 385px;
+    }
+    .modal-lg {
+        width: 800px;
+    }
+}
+
+.modal#{$dark-theme-class-name},
+#{$dark-theme-class-name} .modal {
+    color: $body-text-color;
+    /// make the headers the default color
+    @each $header in $headers {
+        #{$header} {
+            color: $header-text-color;
+        }
+    }
+    /// make the labels the default colors
+    label,
+    time,
+    label.label-small,
+    .label.label-small,
+    .label-small,
+    label.label-large,
+    .label.label-large,
+    .lable-large,
+    .timestamp {
+        color: $ghost-color;
+    }
+}
+
+/// blur the background of the modal
+// .modal-open .container-fluid,
+// .modal-open .container {
+//     @include ie-edge() {
+//         filter: blur(0px);
+//     }
+//     filter: blur(7px);
+// }

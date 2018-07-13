@@ -1,0 +1,20 @@
+@mixin vertical-offset($size, $spacing) {
+    $spacing-decimal: $spacing / ($spacing * 0 + 1);    // convert the spacing from pixels to a number without units
+    $spacing-scale-decimal: ($spacing-scale / ($spacing-scale * 0 + 1)) / 100;  // convert scale to a decimal
+    .vertical-offset-#{$size} {
+        // vertical offset is important, it should override any previously established spacing on that element block
+        // sass-lint:disable-all
+        @if $spacing-decimal >= 34 {
+            margin-bottom: unquote('#{$spacing-decimal - ($spacing-decimal - $spacing-decimal * $spacing-scale-decimal)}px !important');
+            @include breakpoint-sm() {
+                margin-bottom: $spacing !important;
+            }            
+        } @else {
+            margin-bottom: $spacing !important;
+        }
+        // sass-lint:enable-all
+    }
+}
+
+
+

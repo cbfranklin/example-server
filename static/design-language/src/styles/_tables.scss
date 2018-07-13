@@ -1,0 +1,93 @@
+$table-text-muted: $text-muted;
+$table-border-color: $border-color;
+$table-background-inactive-color: $background-inactive-color;
+$table-link-color: $link-color;
+
+// Colors, font-weight, and padding to overwrite Bootstrap
+.table {
+    border-bottom: 1px solid $table-border-color;
+    thead tr th {
+        color: $table-text-muted;
+        font-weight: 400;
+        padding: 6px;
+    }
+    tbody tr {
+        &.selected {
+            td {
+                background-color: $table-background-inactive-color;
+            }
+        }
+        td {
+            padding: 6px;
+            border-color: $table-border-color;
+            vertical-align: middle;
+        }
+        &:first-child td {
+            border-top: none;
+        }
+    }
+    &.table-condensed {
+        thead tr th,
+        tbody tr td {
+            padding: 2px;
+        }
+    }
+    &.table-hover {
+        tbody tr {
+            &:hover {
+                background-color: lighten($table-link-color, 55%);
+            }
+            &.selected:hover {
+                td {
+                    background-color: lighten($table-link-color, 55%);
+                }
+            }
+        }
+    }
+    // removes padding from a <td> within a nested table in DL-react table
+    tr td.nested-table-cell {
+        padding: 0;
+    }
+    .btn {
+        margin: 0;
+    }
+}
+
+// remove margin and border for nested tables 
+td.nested-table-cell table {
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+// E*trade nested rows
+.table tbody tr.nested-single,
+.table tbody tr.nested-double {
+    display: none;
+    td:first-child {
+        border-left: 6px solid $table-border-color;
+    }
+    // the bottom row of a nested "group"
+    &.nested-end td {
+        border-bottom: 4px solid $table-border-color;
+    }
+}
+.table tbody tr.nested-double {
+    td:first-child {
+        border-bottom: 1px solid $white;
+    }
+}
+.table tbody tr.nested-double.nested-end {
+    td:first-child {
+        border-bottom: 4px solid $table-border-color;
+    }
+}
+.table.table-hover tbody tr.nested-double:hover {
+    td:first-child {
+        background-color: $white;
+    }
+}
+
+// E*trade sticky-col
+.table.sticky-col {
+    box-shadow: 5px 0 5px -2px $table-text-muted;
+}

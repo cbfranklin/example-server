@@ -1,0 +1,99 @@
+/// universal message global variables
+$universal-message-border-top-width: 2px;
+$universal-message-padding: $spacing-xs;
+$universal-message-margin-bottom: $component-margins;
+$universal-message-border-color: $border-color;
+/// universal message success variables
+$universal-message-success-background: transparent;
+$universal-message-success-icon-color: #158F15;
+$universal-message-success-icon: "\E5CA";
+/// universal message info variables
+$universal-message-info-background: #F5F8FF;
+$universal-message-info-icon-color: #3766FF;
+$universal-message-info-icon: "\E88E";
+/// universal message danger variables
+$universal-message-danger-background: #FFF2F2;
+$universal-message-danger-icon-color: $negative;
+$universal-message-danger-icon: "\E002";
+.universal-message {
+    // padding: $universal-message-padding;
+    margin: $universal-message-margin-bottom;
+    border: none;
+    border-radius: 0;
+    position: relative;
+    // Improve alignment and spacing of inner content
+    h4 {
+        margin: 0 0 3px 0;
+    }
+    > p,
+    > ul {
+        margin-bottom: 0;
+    }
+    > p + p {
+        margin-top: 5px;
+    }
+    p:last-of-type {
+        margin: 0;
+    }
+    &:before {
+        @include material-icons();
+        position: absolute;
+        font-size: 20px;
+        line-height: 1.8;
+    }
+    .universal-message-content {
+        margin-left: 28px;
+        padding: 10px 30px 10px 10px;
+    }
+    .universal-message-heading {
+        font-size: 13px;
+        font-weight: $font-weight-normal;
+        color: $body-text-color;
+    }
+}
+
+// Dismissible alerts
+//
+// Expand the right padding and account for the close button's positioning.
+.universal-message-dismissable, // The misspelled .alert-dismissable was deprecated in 3.2.0.
+.universal-message-dismissible {
+    padding-right: $universal-message-padding;
+    // Adjust close button size
+    .close {
+        margin-top: 8px;
+        & > .material-icons {
+            font-size: 14px;
+        }
+    }
+}
+
+.universal-message.universal-message-success {
+    @include universal-message-variation($universal-message-success-background, $universal-message-success-icon, $universal-message-success-icon-color);
+    .universal-message-heading {
+        font-size: 22px;
+        font-weight: $font-weight-light;
+        line-height: 1.2;
+    }
+    &:before {
+        font-size: 30px;
+        top: -3px;
+        left: 2px;
+    }
+}
+
+#{$dark-theme-class-name} .universal-message.universal-message-success,
+.universal-message.universal-message-success#{$dark-theme-class-name} {
+    color: $white;
+    .universal-message-heading {
+        color: $white;
+    }
+}
+
+.universal-message-info {
+    @include universal-message-variation($universal-message-info-background, $universal-message-info-icon, $universal-message-info-icon-color);
+}
+
+.universal-message-warning,
+.universal-message-danger {
+    @include universal-message-variation($universal-message-danger-background, $universal-message-danger-icon, $universal-message-danger-icon-color);
+}

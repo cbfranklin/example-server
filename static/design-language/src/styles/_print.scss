@@ -1,0 +1,117 @@
+// most of this is taken from vanilla bootstrap, but adjusted to be more color accurate on print
+
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+// ==========================================================================
+// Print styles.
+// Inlined to avoid the additional HTTP request: h5bp.com/r
+// ==========================================================================
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        // sass-lint:disable-all
+        // disable linting because these styles are important so there are no overrides on printing
+        box-shadow: none !important;
+        text-shadow: none !important;
+        // disabled linting because we want webkit to print better
+        -webkit-print-color-adjust: exact;
+        // sass-lint:enable-all
+    }
+
+    a,
+    a:visited {
+        text-decoration: none;
+    }
+
+    a[href]:after {
+        content: "";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; // h5bp.com/t
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        // disable linting so print styles take precedence with !important
+        // sass-lint:disable-all
+        max-width: 100% !important;
+        // sass-lint:enable-all
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+
+    // Bootstrap specific changes start
+
+    // Bootstrap components
+    .navbar {
+        display: none;
+    }
+    .btn,
+    .dropup > .btn {
+        > .caret {
+            // disable linting so print styles take precedence with !important
+            // sass-lint:disable-all
+            border-top-color: #000000 !important;
+            // sass-lint:enable-all
+        }
+    }
+    .label {
+        // disable linting so print styles take precedence with !important
+        // sass-lint:disable-all
+        border: 1px solid #000000;
+        // sass-lint:enable-all
+    }
+
+    .table {
+        // disable linting so print styles take precedence with !important
+        // sass-lint:disable-all
+        border-collapse: collapse !important;
+        // sass-lint:enable-all
+
+        td,
+        th {
+            // disable linting so print styles take precedence with !important
+            // sass-lint:disable-all
+            background-color: #ffffff !important;
+            // sass-lint:enable-all
+        }
+    }
+    .table-bordered {
+        th,
+        td {
+            // disable linting so print styles take precedence with !important
+            // sass-lint:disable-all
+            border: 1px solid #dddddd !important;
+            // sass-lint:enable-all
+        }
+    }
+
+    // Bootstrap specific changes end
+}

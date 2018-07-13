@@ -1,0 +1,42 @@
+@mixin gt-ie-9 {
+    @media screen and (min-width: 0\0) {
+        @content;
+    }
+}
+
+@mixin ie-edge() {
+    // sass-lint:disable-all
+    @supports (-ms-ime-align:auto) {
+        @content;
+    }
+    // sass-lint:enable-all
+}
+
+@mixin ios-webkit {
+    // sass-lint:disable-all
+    //@supports (-webkit-text-size-adjust: none) and (not (-ms-ime-align: auto)) and (not (-moz-appearance: none)) {
+    @media screen and (max-device-width: $screen-xs-max) and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) {
+        @content;
+    }
+    // sass-lint:enable-all
+}
+
+@mixin firefox {
+    // disable linting for vendor prefixes because we want to target Firefox for this mixin
+    // sass-lint:disable-all
+    @-moz-document url-prefix() {
+        @content;
+    }
+    // sass-lint:enable-all
+}
+
+@mixin ie-11($selector) {
+    // usage is: @include ie-11('selector-name-must-be-in-singlequotes') {}
+    // disable linting for vendor prefixes because we want to target Internet Explorer for this mixin
+    // sass-lint:disable-all
+    _:-ms-fullscreen,
+    :root #{$selector} {
+        @content;
+    }
+    // sass-lint:enable-all
+}

@@ -1,0 +1,45 @@
+@mixin make-sm-column-centered($columns, $gutter: $grid-gutter-width) {
+    @media (min-width: $screen-sm-min) {
+        @if ($columns < 12) {
+            width: percentage(($columns / $grid-columns));
+        }
+    }
+}
+
+@mixin make-md-column-centered($columns, $gutter: $grid-gutter-width) {
+    @media (min-width: $screen-md-min) {
+        width: percentage(($columns / $grid-columns));
+    }
+}
+
+@mixin col-centered($column-num: 6, $offset: 3) {
+    $centered-layout-error: "Sorry the @include centered-layout() wasn\'t meant to be used this way. `#{$column-num}` is an odd number and is not appropriate when trying to center the layout. Try an even number <= 10.";
+    @if (($column-num >=12) or ($column-num < 1)) {
+        @error "The @include centered-layout() wasn\'t meant to be used this way. Try an even number <= 10";
+    }
+    @else if $column-num % 2 != 0 {
+        @error $centered-layout-error;
+    }
+    @else if $column-num == 10 {
+        $offset: 1;
+    }
+    @else if $column-num == 8 {
+        $offset: 2;
+    }
+    @else if $column-num == 6 {
+        $offset: 3;
+    }
+    @else if $column-num == 4 {
+        $offset: 4;
+    }
+    @else if $column-num == 2 {
+        $offset: 5;
+    }
+
+    @include make-xs-column(12);
+    @include make-sm-column-centered($column-num + 2);
+    @include make-md-column-centered($column-num);
+
+    @include make-sm-column-offset($offset - 1);
+    @include make-md-column-offset($offset);
+}

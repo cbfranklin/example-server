@@ -1,0 +1,52 @@
+/// toggle button alternative
+.form-group .toggle-button {
+    display: block;
+    width: 100%;
+    min-height: 32px;
+    height: auto;
+    position: relative;
+    > input[type="radio"],
+    input[type="checkbox"] {
+        margin-left: 0;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        background: none;
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+        &:focus,
+        &[disabled]:focus {
+            & + .toggle-button-wrapper {
+                border: 1px solid $brand-green;
+            }
+        }
+    }
+    .toggle-button-wrapper {
+        border: 1px solid $border-color;
+        padding: 4px 10px 4px 10px;
+        > *:first-of-type {
+            padding-right: 20px;
+        }
+    }
+    > input[type="radio"]:checked + .toggle-button-wrapper,
+    > input[type="checkbox"]:checked + .toggle-button-wrapper {
+        border: 2px solid $brand-green;
+        font-weight: $font-weight-medium;
+        label {
+            font-weight: $font-weight-medium;
+        }
+        > *:first-of-type:after {
+            @include material-icons();
+            @include center-y();
+            content: "\E5CA";
+            color: $brand-green;
+            font-size: 13px;
+            float: right;
+            position: absolute;
+            display: inline-block;
+            right: 15px;
+        }
+    }
+}
